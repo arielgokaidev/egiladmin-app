@@ -22,8 +22,8 @@ public class GestionBD {
             "'torre' VARCHAR(45)," +
             "'estado' VARCHAR(45)," +
             "'residentes_idresidente' INTEGER," +
-            "PRIMARY KEY('iddepartamento'),'" +
-            "FOREIGN KEY('residentes_idresidente') REFERENCES 'residentes' (¡idresidente')" +
+            "PRIMARY KEY('iddepartamento')," +
+            "FOREIGN KEY('residentes_idresidente') REFERENCES 'residentes' ('idresidente')" +
             ");";
 
     public static final String CREAR_TABLA_RESERVAS = "CREATE TABLE 'reservas' (" +
@@ -33,7 +33,7 @@ public class GestionBD {
             "'valor' INT," +
             "'departamentos_iddepartamento' INTEGER," +
             "PRIMARY KEY('idreserva')," +
-            "FOREIGN KEY('departamentos_iddepartamento') REFERENCES 'departamentos'('iddepartamento')" +
+            "FOREIGN KEY('departamentos_iddepartamento') REFERENCES 'departamentos' ('iddepartamento')" +
             ");";
 
     public AsistenteBD asistenteBD;
