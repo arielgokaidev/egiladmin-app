@@ -17,7 +17,7 @@ public class GestionBD {
             "  PRIMARY KEY (`idresidente`));";
 
     public static final String CREAR_TABLA_DEPARTAMENTOS = "CREATE TABLE 'departamentos' (" +
-            "'iddepartamento' INT NOT NULL," +
+            "'iddepartamento' INT NOT NULL AUTOINCREMENT," +
             "'numero' VARCHAR(45)," +
             "'torre' VARCHAR(45)," +
             "'estado' VARCHAR(45)," +
@@ -27,7 +27,7 @@ public class GestionBD {
             ");";
 
     public static final String CREAR_TABLA_RESERVAS = "CREATE TABLE 'reservas' (" +
-            "'idreserva' INT NOT NULL," +
+            "'idreserva' INT NOT NULL AUTOINCREMENT," +
             "'fecha' DATE," +
             "'hora' TIME," +
             "'valor' INT," +

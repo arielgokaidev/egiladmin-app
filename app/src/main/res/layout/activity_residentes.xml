@@ -29,4 +29,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="100px"
         android:text="Ver" />
+
+    <Button
+        android:id="@+id/btnActualizarResidentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="100px"
+        android:text="Actualizar" />
+
+    <Button
+        android:id="@+id/btnEliminarResidentes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="100px"
+        android:text="Eliminar" />
 </LinearLayout>

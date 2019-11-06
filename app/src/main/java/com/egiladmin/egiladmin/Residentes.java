@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class Residentes extends AppCompatActivity {
 
     private GestionBD gestionBD;
-    private Button btnIngresarResidentes;
+    private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
 
     @Override
@@ -27,6 +27,9 @@ public class Residentes extends AppCompatActivity {
 
         // Botones
         btnIngresarResidentes = findViewById(R.id.btnIngresarResidentes);
+        btnVerResidentes = findViewById(R.id.btnVerResidentes);
+        btnActualizarResidentes = findViewById(R.id.btnActualizarResidentes);
+        btnEliminarResidentes = findViewById(R.id.btnEliminarResidentes);
 
         // Dialog insertar
         etRut = findViewById(R.id.etRut);
@@ -56,13 +59,13 @@ public class Residentes extends AppCompatActivity {
 
         LayoutInflater inflater = Residentes.this.getLayoutInflater();
 
+        builder.setTitle("Ingresar Residente");
         builder.setView(inflater.inflate(R.layout.dialog_insertar_residente, null));
-
         builder.setSingleChoiceItems(tipos, -1, null);
 
         builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(DialogInterface dialogInterface, int which) {
                 // declarar variables = texto desde input
                 /*
                 String rut = etRut.getText().toString();
@@ -71,7 +74,7 @@ public class Residentes extends AppCompatActivity {
                 String usuario = etUsuario.getText().toString();
                 String password = etPassword.getText().toString();
                 /*String tipo = tipos[i].toString();*/
-                Toast.makeText(getApplicationContext(), "" +tipos[i], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
                 // validar campos
                 // llamar metodo insertar residentes y pasar las variables
             }
