@@ -13,51 +13,5 @@
         android:layout_marginRight="20px"
         android:hint="Rut" />
 
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="30px"
-        android:layout_marginRight="20px"
-        android:hint="Nombre" />
-
-    <EditText
-        android:id="@+id/etApellido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="30px"
-        android:layout_marginRight="20px"
-        android:hint="Apellido" />
-
-    <EditText
-        android:id="@+id/etUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="30px"
-        android:layout_marginRight="20px"
-        android:hint="Usuario" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="20px"
-        android:layout_marginRight="20px"
-        android:layout_marginBottom="50px"
-        android:hint="Contraseña" />
-
-    <EditText
-        android:id="@+id/etTipo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20px"
-        android:layout_marginTop="20px"
-        android:layout_marginRight="20px"
-        android:layout_marginBottom="50px"
-        android:hint="Tipo" />
 
 </LinearLayout>
