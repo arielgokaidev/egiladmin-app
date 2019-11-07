@@ -2,7 +2,12 @@ package com.egiladmin.egiladmin;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionBD {
 
@@ -53,6 +58,51 @@ public class GestionBD {
         contentValues.put("tipo", tipo);
         basedatos.insert("residentes", null, contentValues);
 
+    }
+
+    public List<Residente> leerResidentes() {
+        int id;
+        String rut, nombre, apellido, usuario, password, tipo;
+        Cursor cursor = basedatos.rawQuery("select * from residentes", null);
+        List<Residente> residentes = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(1);
+                rut = cursor.getString(2);
+                nombre = cursor.getString(3);
+                apellido = cursor.getString(4);
+                usuario = cursor.getString(5);
+                password = cursor.getString(6);
+                tipo = cursor.getString(7);
+                residentes.add(new Residente(id, rut, nombre, apellido, usuario, password, tipo));
+            } while (cursor.moveToNext());
+        }else {
+            //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+        }
+        return residentes;
+    }
+
+    // Ocupa esta función para no modificar la original, me falta debuggearla
+    public List<Residente> leer2Residentes() {
+        int id;
+        String rut, nombre, apellido, usuario, password, tipo;
+        Cursor cursor = basedatos.rawQuery("select * from residentes", null);
+        List<Residente> residentes = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(1);
+                rut = cursor.getString(2);
+                nombre = cursor.getString(3);
+                apellido = cursor.getString(4);
+                usuario = cursor.getString(5);
+                password = cursor.getString(6);
+                tipo = cursor.getString(7);
+                residentes.add(new Residente(id, rut, nombre, apellido, usuario, password, tipo));
+            } while (cursor.moveToNext());
+        }else {
+            //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+        }
+        return residentes;
     }
 
 }

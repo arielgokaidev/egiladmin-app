@@ -7,18 +7,25 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Residentes extends AppCompatActivity {
 
     // Variables globales
-
     private GestionBD gestionBD;
     private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
+    private ListView listViewResidentes;
     private String tipo = "";
+    private List<Residente> residentes;
+    //private ArrayList<Residente> residente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,42 +148,31 @@ public class Residentes extends AppCompatActivity {
     //LEER RESIDENTES
     public void dialogoLeer() {
 
-        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
-
         AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
 
         LayoutInflater inflater = Residentes.this.getLayoutInflater();
 
-        builder.setTitle("Ver Residente");
-        builder.setView(inflater.inflate(R.layout.dialog_leer_residente, null));
-        builder.setSingleChoiceItems(tipos, -1, null);
+        View view = inflater.inflate(R.layout.dialog_leer_residente, null);
 
-        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
+        builder.setTitle("Ver Residente");
+        builder.setView(view);
+
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                // declarar variables = texto desde input
-                /*
-                String rut = etRut.getText().toString();
-                String nombre = etNombre.getText().toString();
-                String apellido = etApellido.getText().toString();
-                String usuario = etUsuario.getText().toString();
-                String password = etPassword.getText().toString();
-                /*String tipo = tipos[i].toString();*/
-                Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
-                // validar campos
-                // llamar metodo insertar residentes y pasar las variables
-            }
-        });
-
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
+
+        listViewResidentes = view.findViewById(R.id.listViewResidentes);
+
+        //residentes = gestionBD.leerResidentes();
+        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, residentes);
+        //listViewResidentes.setAdapter(arrayAdapter);
 
         AlertDialog ad = builder.create();
         ad.show();
+
 
     }
     //ACTUALIZAR RESIDENTES
