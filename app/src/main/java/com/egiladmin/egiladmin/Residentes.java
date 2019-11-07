@@ -119,7 +119,7 @@ public class Residentes extends AppCompatActivity {
 
                 // validar campos e insertar
                 gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!"+rut, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -233,6 +233,11 @@ public class Residentes extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
                 // declarar variables = texto desde input
+                String rut = etRut.getText().toString();
+
+
+               // gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
+                Toast.makeText(getApplicationContext(), "¡Usuario eliminado con éxito!"+rut, Toast.LENGTH_SHORT).show();
                 /*
                 String rut = etRut.getText().toString();
                 String nombre = etNombre.getText().toString();
@@ -240,7 +245,7 @@ public class Residentes extends AppCompatActivity {
                 String usuario = etUsuario.getText().toString();
                 String password = etPassword.getText().toString();
                 /*String tipo = tipos[i].toString();*/
-                Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
                 // validar campos
                 // llamar metodo insertar residentes y pasar las variables
             }

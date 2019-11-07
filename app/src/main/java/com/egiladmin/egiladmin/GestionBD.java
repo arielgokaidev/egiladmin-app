@@ -105,4 +105,10 @@ public class GestionBD {
         return residentes;
     }
 
+    public void eliminarResidente(String rut) { 
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("rut", rut);
+        basedatos.delete("residentes", "rut=" + rut, null);
+
+    }
 }
