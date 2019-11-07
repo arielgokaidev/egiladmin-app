@@ -7,13 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 public class GestionBD {
 
     public static final String CREAR_TABLA_RESIDENTES = "CREATE TABLE `residentes` (" +
-            "  `idresidente` INT NOT NULL," +
-            "  `rut` VARCHAR(45) NULL," +
-            "  `nombre` VARCHAR(45) NULL," +
-            "  `apellido` VARCHAR(45) NULL," +
-            "  `usuario` VARCHAR(45) NULL," +
-            "  `password` VARCHAR(45) NULL," +
-            "  `tipo` VARCHAR(45) NULL," +
+            "  'idresidente' INT NOT NULL," +
+            "  'rut' VARCHAR(45) NULL," +
+            "  'nombre' VARCHAR(45) NULL," +
+            "  'apellido' VARCHAR(45) NULL," +
+            "  'usuario' VARCHAR(45) NULL," +
+            "  'password' VARCHAR(45) NULL," +
+            "  'tipo' VARCHAR(45) NULL," +
             "  PRIMARY KEY (`idresidente`));";
 
     public static final String CREAR_TABLA_DEPARTAMENTOS = "CREATE TABLE 'departamentos' (" +

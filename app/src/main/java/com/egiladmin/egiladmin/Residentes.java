@@ -15,7 +15,7 @@ public class Residentes extends AppCompatActivity {
 
     private GestionBD gestionBD;
     private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
-    private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
+    private EditText etRut, etNombre, etApellido, etUsuario, etPassword, etTipo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class Residentes extends AppCompatActivity {
         etApellido = findViewById(R.id.etApellido);
         etUsuario = findViewById(R.id.etUsuario);
         etPassword = findViewById(R.id.etPassword);
+        etTipo = findViewById(R.id.etTipo);
 
         // Listeners
         btnIngresarResidentes.setOnClickListener(new View.OnClickListener() {
@@ -46,11 +47,33 @@ public class Residentes extends AppCompatActivity {
             }
         });
 
-        // BD
+        btnVerResidentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogoLeer();
+            }
+        });
+
+        btnActualizarResidentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogoActualizar();
+            }
+        });
+
+        btnEliminarResidentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogoEliminar();
+            }
+        });
+
+        // INSTANCIACION DE LA BASE DE DATOS
         gestionBD = new GestionBD(this);
 
     }
 
+    //INGRESO RESIDENTES
     public void dialogoIngresar() {
 
         final CharSequence tipos[] = {"Dueño", "Arrendatario"};
@@ -61,6 +84,47 @@ public class Residentes extends AppCompatActivity {
 
         builder.setTitle("Ingresar Residente");
         builder.setView(inflater.inflate(R.layout.dialog_insertar_residente, null));
+        builder.setSingleChoiceItems(tipos, -1, null);
+
+        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                // declarar variables = texto desde input
+
+                String rut = etRut.getText().toString();
+                String nombre = etNombre.getText().toString();
+                String apellido = etApellido.getText().toString();
+                String usuario = etUsuario.getText().toString();
+                String password = etPassword.getText().toString();
+                String tipo = etTipo.toString();
+               // Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
+                // validar campos
+                // llamar metodo insertar residentes y pasar las variables
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        ad.show();
+
+    }
+    //LEER RESIDENTES
+    public void dialogoLeer() {
+
+        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+
+        LayoutInflater inflater = Residentes.this.getLayoutInflater();
+
+        builder.setTitle("Ver Residente");
+        builder.setView(inflater.inflate(R.layout.dialog_leer_residente, null));
         builder.setSingleChoiceItems(tipos, -1, null);
 
         builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
@@ -91,7 +155,87 @@ public class Residentes extends AppCompatActivity {
         ad.show();
 
     }
-    
+    //ACTUALIZAR RESIDENTES
+    public void dialogoActualizar() {
 
+        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+
+        LayoutInflater inflater = Residentes.this.getLayoutInflater();
+
+        builder.setTitle("Actualizar Residente");
+        builder.setView(inflater.inflate(R.layout.dialog_actualizar_residente, null));
+        builder.setSingleChoiceItems(tipos, -1, null);
+
+        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                // declarar variables = texto desde input
+                /*
+                String rut = etRut.getText().toString();
+                String nombre = etNombre.getText().toString();
+                String apellido = etApellido.getText().toString();
+                String usuario = etUsuario.getText().toString();
+                String password = etPassword.getText().toString();
+                /*String tipo = tipos[i].toString();*/
+                Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
+                // validar campos
+                // llamar metodo insertar residentes y pasar las variables
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        ad.show();
+
+    }
+    //ELIMINAR RESIDENTES
+    public void dialogoEliminar() {
+
+        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+
+        LayoutInflater inflater = Residentes.this.getLayoutInflater();
+
+        builder.setTitle("Eliminar Residente");
+        builder.setView(inflater.inflate(R.layout.dialog_eliminar_residente, null));
+        builder.setSingleChoiceItems(tipos, -1, null);
+
+        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                // declarar variables = texto desde input
+                /*
+                String rut = etRut.getText().toString();
+                String nombre = etNombre.getText().toString();
+                String apellido = etApellido.getText().toString();
+                String usuario = etUsuario.getText().toString();
+                String password = etPassword.getText().toString();
+                /*String tipo = tipos[i].toString();*/
+                Toast.makeText(getApplicationContext(), "" +tipos[which], Toast.LENGTH_SHORT).show();
+                // validar campos
+                // llamar metodo insertar residentes y pasar las variables
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog ad = builder.create();
+        ad.show();
+
+    }
 
 }
