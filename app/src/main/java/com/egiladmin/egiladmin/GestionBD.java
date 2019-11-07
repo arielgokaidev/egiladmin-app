@@ -6,34 +6,32 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class GestionBD {
 
-    public static final String CREAR_TABLA_RESIDENTES = "CREATE TABLE `residentes` (" +
-            "  'idresidente' INT NOT NULL," +
-            "  'rut' VARCHAR(45) NULL," +
-            "  'nombre' VARCHAR(45) NULL," +
-            "  'apellido' VARCHAR(45) NULL," +
-            "  'usuario' VARCHAR(45) NULL," +
-            "  'password' VARCHAR(45) NULL," +
-            "  'tipo' VARCHAR(45) NULL," +
-            "  PRIMARY KEY (`idresidente`));";
-
-    public static final String CREAR_TABLA_DEPARTAMENTOS = "CREATE TABLE 'departamentos' (" +
-            "'iddepartamento' INT NOT NULL AUTOINCREMENT," +
-            "'numero' VARCHAR(45)," +
-            "'torre' VARCHAR(45)," +
-            "'estado' VARCHAR(45)," +
-            "'residentes_idresidente' INTEGER," +
-            "PRIMARY KEY('iddepartamento')," +
-            "FOREIGN KEY('residentes_idresidente') REFERENCES 'residentes' ('idresidente')" +
+    public static final String CREAR_TABLA_RESIDENTES = "CREATE TABLE 'residentes' (" +
+            "'idresidente' INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "'rut' VARCHAR(45)," +
+            "'nombre' VARCHAR(45)," +
+            "'apellido' VARCHAR(45)," +
+            "'usuario' VARCHAR(45)," +
+            "'password' VARCHAR(45)," +
+            "'tipo' VARCHAR(45)" +
             ");";
 
-    public static final String CREAR_TABLA_RESERVAS = "CREATE TABLE 'reservas' (" +
-            "'idreserva' INT NOT NULL AUTOINCREMENT," +
-            "'fecha' DATE," +
-            "'hora' TIME," +
-            "'valor' INT," +
-            "'departamentos_iddepartamento' INTEGER," +
-            "PRIMARY KEY('idreserva')," +
-            "FOREIGN KEY('departamentos_iddepartamento') REFERENCES 'departamentos' ('iddepartamento')" +
+    public static final String CREAR_TABLA_DEPARTAMENTOS = "CREATE TABLE 'departamentos' (" +
+            "'iddepartamento' INTEGER PRIMARY KEY AUTOINCREMENT,  " +
+            "'numero' VARCHAR(45),  " +
+            "'torre' VARCHAR(45),  " +
+            "'estado' VARCHAR(45),  " +
+            "'residentes_idresidente' INTEGER,  " +
+            "FOREIGN KEY('residentes_idresidente') REFERENCES 'residentes'('idresidente')  " +
+            ");";
+
+    public static final String CREAR_TABLA_RESERVAS = "CREATE TABLE 'reservas' (  " +
+            " 'idreserva' INTEGER PRIMARY KEY AUTOINCREMENT,  " +
+            " 'fecha' DATE,  " +
+            " 'hora' TIME,  " +
+            " 'valor' INT,  " +
+            " 'departamentos_iddepartamento' INTEGER,  " +
+            " FOREIGN KEY('departamentos_iddepartamento') REFERENCES 'departamentos'('iddepartamento')  " +
             ");";
 
     public AsistenteBD asistenteBD;
@@ -42,6 +40,18 @@ public class GestionBD {
     public GestionBD(Context context) {
         asistenteBD = new AsistenteBD(context);
         basedatos = asistenteBD.getWritableDatabase();
+    }
+
+    public void insertarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("rut", rut);
+        contentValues.put("nombre", nombre);
+        contentValues.put("apellido", apellido);
+        contentValues.put("usuario", usuario);
+        contentValues.put("password", password);
+        contentValues.put("tipo", tipo);
+        basedatos.insert("residentes", null, contentValues);
 
     }
 
