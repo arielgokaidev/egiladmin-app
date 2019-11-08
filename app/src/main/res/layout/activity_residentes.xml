@@ -1,54 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="100px"
-        android:gravity="center"
-        android:text="Residentes"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnIngresarResidentes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="100px"
-        android:layout_marginRight="100px"
-        android:text="Ingresar" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="100px"
+            android:gravity="center"
+            android:text="Residentes"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnVerResidentes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="100px"
-        android:layout_marginRight="100px"
-        android:text="Ver" />
+        <Button
+            android:id="@+id/btnIngresarResidentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="100px"
+            android:layout_marginRight="100px"
+            android:text="Ingresar" />
 
-    <Button
-        android:id="@+id/btnActualizarResidentes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="100px"
-        android:layout_marginRight="100px"
-        android:text="Actualizar" />
+        <Button
+            android:id="@+id/btnVerResidentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="100px"
+            android:layout_marginRight="100px"
+            android:text="Ver"
+            android:onClick="buscar"/>
 
-    <Button
-        android:id="@+id/btnEliminarResidentes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100px"
-        android:layout_marginTop="100px"
-        android:layout_marginRight="100px"
-        android:text="Eliminar" />
-</LinearLayout>
+        <Button
+            android:id="@+id/btnActualizarResidentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="100px"
+            android:layout_marginRight="100px"
+            android:text="Actualizar" />
+
+        <Button
+            android:id="@+id/btnEliminarResidentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:layout_marginTop="100px"
+            android:layout_marginRight="100px"
+            android:text="Eliminar" />
+
+        <EditText
+            android:id="@+id/etRut2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="20px"
+            android:hint="Rut" />
+
+        <EditText
+            android:id="@+id/etNombre2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="20px"
+            android:hint="Nombre" />
+
+        <EditText
+            android:id="@+id/etApellido2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="20px"
+            android:hint="Apellido" />
+
+        <EditText
+            android:id="@+id/etUsuario2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="20px"
+            android:hint="Usuario" />
+
+        <EditText
+            android:id="@+id/etPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="20px"
+            android:hint="Contraseña" />
+
+        <EditText
+            android:id="@+id/etTipo2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="20px"
+            android:hint="Tipo" />
+
+    </LinearLayout>
+</ScrollView>

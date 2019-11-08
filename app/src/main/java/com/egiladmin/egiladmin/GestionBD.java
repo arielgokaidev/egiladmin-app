@@ -67,36 +67,13 @@ public class GestionBD {
         List<Residente> residentes = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                id = cursor.getInt(1);
-                rut = cursor.getString(2);
-                nombre = cursor.getString(3);
-                apellido = cursor.getString(4);
-                usuario = cursor.getString(5);
-                password = cursor.getString(6);
-                tipo = cursor.getString(7);
-                residentes.add(new Residente(id, rut, nombre, apellido, usuario, password, tipo));
-            } while (cursor.moveToNext());
-        }else {
-            //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
-        }
-        return residentes;
-    }
-
-    // Ocupa esta función para no modificar la original, me falta debuggearla
-    public List<Residente> leer2Residentes() {
-        int id;
-        String rut, nombre, apellido, usuario, password, tipo;
-        Cursor cursor = basedatos.rawQuery("select * from residentes", null);
-        List<Residente> residentes = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            do {
-                id = cursor.getInt(1);
-                rut = cursor.getString(2);
-                nombre = cursor.getString(3);
-                apellido = cursor.getString(4);
-                usuario = cursor.getString(5);
-                password = cursor.getString(6);
-                tipo = cursor.getString(7);
+                id = cursor.getInt(0);
+                rut = cursor.getString(1);
+                nombre = cursor.getString(2);
+                apellido = cursor.getString(3);
+                usuario = cursor.getString(4);
+                password = cursor.getString(5);
+                tipo = cursor.getString(6);
                 residentes.add(new Residente(id, rut, nombre, apellido, usuario, password, tipo));
             } while (cursor.moveToNext());
         }else {
@@ -110,5 +87,10 @@ public class GestionBD {
         contentValues.put("rut", rut);
         basedatos.delete("residentes", "rut=" + rut, null);
 
+    }
+
+    public Cursor leerUnResidente(String rut) {
+        Cursor cursor = basedatos.rawQuery("select * from residentes where rut =" + rut, null);
+        return cursor;
     }
 }

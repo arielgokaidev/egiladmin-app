@@ -4,6 +4,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,8 @@ public class Residentes extends AppCompatActivity {
     private ListView listViewResidentes;
     private String tipo = "";
     private List<Residente> residentes;
+
+    private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
     //private ArrayList<Residente> residente;
 
     @Override
@@ -49,14 +53,14 @@ public class Residentes extends AppCompatActivity {
                 dialogoIngresar();
             }
         });
-
+/*
         btnVerResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogoLeer();
             }
         });
-
+*/
         btnActualizarResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +77,14 @@ public class Residentes extends AppCompatActivity {
 
         // INSTANCIACION DE LA BASE DE DATOS
         gestionBD = new GestionBD(this);
+
+        // EditText de prueba
+        etRut2 = findViewById(R.id.etRut2);
+        etNombre2 = findViewById(R.id.etNombre2);
+        etApellido2 = findViewById(R.id.etApellido2);
+        etUsuario2 = findViewById(R.id.etUsuario2);
+        etPassword2 = findViewById(R.id.etPassword2);
+        etTipo2 = findViewById(R.id.etTipo2);
 
     }
 
@@ -261,6 +273,42 @@ public class Residentes extends AppCompatActivity {
         AlertDialog ad = builder.create();
         ad.show();
 
+    }
+
+    public void buscar(View view){
+
+        String rut = etRut2.getText().toString();
+
+
+        if(!rut.isEmpty()){
+            Cursor cursor = gestionBD.leerUnResidente(rut);
+            //Valida que la fila tenga datos
+            if(cursor.moveToFirst()){
+                etRut2.setText(cursor.getString(1));
+                etNombre2.setText(cursor.getString(2));
+                etApellido2.setText(cursor.getString(3));
+                etUsuario2.setText(cursor.getString(4));
+                etPassword2.setText(cursor.getString(5));
+                etTipo2.setText(cursor.getString(6));
+            }else{
+                Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
+                etRut2.setText("");
+                etNombre2.setText("");
+                etApellido2.setText("");
+                etUsuario2.setText("");
+                etPassword2.setText("");
+                etTipo2.setText("");
+            }
+
+        }else{
+            Toast.makeText(this,"Introducir rut",Toast.LENGTH_SHORT).show();
+            etRut2.setText("");
+            etNombre2.setText("");
+            etApellido2.setText("");
+            etUsuario2.setText("");
+            etPassword2.setText("");
+            etTipo2.setText("");
+        }
     }
 
 }
