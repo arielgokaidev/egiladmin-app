@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,7 +132,7 @@ public class Residentes extends AppCompatActivity {
 
                 // validar campos e insertar
                 gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!"+rut, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!"+ rut, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -279,19 +280,19 @@ public class Residentes extends AppCompatActivity {
 
         String rut = etRut2.getText().toString();
 
-
-        if(!rut.isEmpty()){
-            Cursor cursor = gestionBD.leerUnResidente(rut);
-            //Valida que la fila tenga datos
-            if(cursor.moveToFirst()){
-                etRut2.setText(cursor.getString(1));
-                etNombre2.setText(cursor.getString(2));
-                etApellido2.setText(cursor.getString(3));
-                etUsuario2.setText(cursor.getString(4));
-                etPassword2.setText(cursor.getString(5));
-                etTipo2.setText(cursor.getString(6));
-            }else{
-                Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
+        try {
+            if (!rut.isEmpty()) {
+                Cursor cursor = gestionBD.leerUnResidente(rut);
+                if (cursor.moveToFirst()) {
+                    etRut2.setText(cursor.getString(1));
+                    etNombre2.setText(cursor.getString(2));
+                    etApellido2.setText(cursor.getString(3));
+                    etUsuario2.setText(cursor.getString(4));
+                    etPassword2.setText(cursor.getString(5));
+                    etTipo2.setText(cursor.getString(6));
+                }
+            } else {
+                Toast.makeText(this,"Introducir rut",Toast.LENGTH_SHORT).show();
                 etRut2.setText("");
                 etNombre2.setText("");
                 etApellido2.setText("");
@@ -299,16 +300,10 @@ public class Residentes extends AppCompatActivity {
                 etPassword2.setText("");
                 etTipo2.setText("");
             }
-
-        }else{
-            Toast.makeText(this,"Introducir rut",Toast.LENGTH_SHORT).show();
-            etRut2.setText("");
-            etNombre2.setText("");
-            etApellido2.setText("");
-            etUsuario2.setText("");
-            etPassword2.setText("");
-            etTipo2.setText("");
+        } catch (SQLiteException e) {
+            Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
         }
+
     }
 
 }
