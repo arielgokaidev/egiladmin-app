@@ -132,7 +132,7 @@ public class Residentes extends AppCompatActivity {
 
                 // validar campos e insertar
                 gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!"+ rut, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -284,12 +284,12 @@ public class Residentes extends AppCompatActivity {
             if (!rut.isEmpty()) {
                 Cursor cursor = gestionBD.leerUnResidente(rut);
                 if (cursor.moveToFirst()) {
-                    etRut2.setText(cursor.getString(1));
-                    etNombre2.setText(cursor.getString(2));
-                    etApellido2.setText(cursor.getString(3));
-                    etUsuario2.setText(cursor.getString(4));
-                    etPassword2.setText(cursor.getString(5));
-                    etTipo2.setText(cursor.getString(6));
+                    etRut2.setText(cursor.getString(0));
+                    etNombre2.setText(cursor.getString(1));
+                    etApellido2.setText(cursor.getString(2));
+                    etUsuario2.setText(cursor.getString(3));
+                    etPassword2.setText(cursor.getString(4));
+                    etTipo2.setText(cursor.getString(5));
                 }
             } else {
                 Toast.makeText(this,"Introducir rut",Toast.LENGTH_SHORT).show();
