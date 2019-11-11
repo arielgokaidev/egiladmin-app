@@ -17,3 +17,5 @@
 /app/.classpath
 /app/.project
 /app/.settings/
+/.settings
+/app/.settings

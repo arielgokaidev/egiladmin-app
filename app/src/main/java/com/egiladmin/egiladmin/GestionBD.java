@@ -80,10 +80,25 @@ public class GestionBD {
         return residentes;
     }
 
-    public void eliminarResidente(String rut) { 
+    public void eliminarResidente(String rut) {
+
+        int cantidad = basedatos.delete("residentes", "rut =" + rut, null);
+
+
+
+
+    }
+    public void actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put("rut", rut);
-        basedatos.delete("residentes", "rut=" + rut, null);
+        contentValues.put("nombre", nombre);
+        contentValues.put("apellido", apellido);
+        contentValues.put("usuario", usuario);
+        contentValues.put("password", password);
+        contentValues.put("tipo", tipo);
+        //
+        //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
+        int cantidad = basedatos.update("residentes", contentValues, "rut=" + rut, null);
 
     }
 
