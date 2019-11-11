@@ -2,7 +2,6 @@ package com.egiladmin.egiladmin;
 
 public class Residente {
 
-    private int id;
     private String rut;
     private String nombre;
     private String apellido;
@@ -10,22 +9,13 @@ public class Residente {
     private String password;
     private String tipo;
 
-    public Residente(int id, String rut, String nombre, String apellido, String usuario, String password, String tipo) {
-        this.setId(id);
+    public Residente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
         this.setRut(rut);
         this.setNombre(nombre);
         this.setApellido(apellido);
         this.setUsuario(usuario);
         this.setPassword(password);
         this.setTipo(tipo);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getRut() {
