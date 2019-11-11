@@ -37,7 +37,7 @@
             android:layout_marginTop="100px"
             android:layout_marginRight="100px"
             android:text="Ver"
-            android:onClick="buscar"/>
+            />
 
         <Button
             android:id="@+id/btnActualizarResidentes"

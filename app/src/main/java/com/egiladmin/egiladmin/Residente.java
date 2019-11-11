@@ -9,6 +9,10 @@ public class Residente {
     private String password;
     private String tipo;
 
+    public Residente(String rut) {
+        this.setRut(rut);
+    }
+
     public Residente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
         this.setRut(rut);
         this.setNombre(nombre);

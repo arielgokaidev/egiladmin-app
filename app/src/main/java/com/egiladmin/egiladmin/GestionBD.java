@@ -58,23 +58,24 @@ public class GestionBD {
 
     }
 
-    public List<Residente> leerResidentes() {
-        int id;
+    public ArrayList<Residente> leerResidentes() {
         String rut, nombre, apellido, usuario, password, tipo;
         Cursor cursor = basedatos.rawQuery("select * from residentes", null);
-        List<Residente> residentes = new ArrayList<>();
+        ArrayList<Residente> residentes = new ArrayList<Residente>();
         if (cursor.moveToFirst()) {
             do {
                 rut = cursor.getString(0);
+                /*
                 nombre = cursor.getString(1);
                 apellido = cursor.getString(2);
                 usuario = cursor.getString(3);
                 password = cursor.getString(4);
                 tipo = cursor.getString(5);
-                residentes.add(new Residente(rut, nombre, apellido, usuario, password, tipo));
+
+                 */
+                Residente residente = new Residente(rut);
+                residentes.add(residente);
             } while (cursor.moveToNext());
-        }else {
-            //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
         }
         return residentes;
     }

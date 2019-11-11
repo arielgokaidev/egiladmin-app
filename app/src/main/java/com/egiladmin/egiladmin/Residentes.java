@@ -2,6 +2,7 @@ package com.egiladmin.egiladmin;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.widgets.ResolutionDimension;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,9 +29,10 @@ public class Residentes extends AppCompatActivity {
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
     private ListView listViewResidentes;
     private String tipo = "";
-    private List<Residente> residentes;
+    //private List<Residente> residentes;
 
     private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
+    private TextView textView3;
     //private ArrayList<Residente> residente;
 
     @Override
@@ -54,14 +57,14 @@ public class Residentes extends AppCompatActivity {
                 dialogoIngresar();
             }
         });
-/*
+
         btnVerResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogoLeer();
             }
         });
-*/
+
         btnActualizarResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,16 +181,24 @@ public class Residentes extends AppCompatActivity {
         });
 
         listViewResidentes = view.findViewById(R.id.listViewResidentes);
+        textView3 = view.findViewById(R.id.textView3);
 
-        //residentes = gestionBD.leerResidentes();
-        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, residentes);
-        //listViewResidentes.setAdapter(arrayAdapter);
+        ArrayList<Residente> residentes = gestionBD.leerResidentes();
+        int cant = residentes.size();
+        Toast.makeText(getApplicationContext(), "Cantidad: " + cant, Toast.LENGTH_SHORT).show();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, residentes);
 
+        listViewResidentes.setAdapter(arrayAdapter);
+        String texto = "";
+        for (int i = 0; i < residentes.size(); i++) {
+            texto += residentes.get(i).toString();
+        }
+        textView3.setText(texto);
         AlertDialog ad = builder.create();
         ad.show();
 
-
     }
+
     //ACTUALIZAR RESIDENTES
     public void dialogoActualizar() {
 
