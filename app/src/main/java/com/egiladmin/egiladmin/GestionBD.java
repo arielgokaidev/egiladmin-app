@@ -65,15 +65,13 @@ public class GestionBD {
         if (cursor.moveToFirst()) {
             do {
                 rut = cursor.getString(0);
-                /*
                 nombre = cursor.getString(1);
                 apellido = cursor.getString(2);
                 usuario = cursor.getString(3);
                 password = cursor.getString(4);
                 tipo = cursor.getString(5);
 
-                 */
-                Residente residente = new Residente(rut);
+                Residente residente = new Residente(rut, nombre, apellido, usuario, password, tipo);
                 residentes.add(residente);
             } while (cursor.moveToNext());
         }
@@ -81,13 +79,9 @@ public class GestionBD {
     }
 
     public void eliminarResidente(String rut) {
-
         int cantidad = basedatos.delete("residentes", "rut =" + rut, null);
-
-
-
-
     }
+
     public void actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
 
         ContentValues contentValues = new ContentValues();

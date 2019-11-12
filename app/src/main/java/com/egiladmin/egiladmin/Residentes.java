@@ -2,24 +2,19 @@ package com.egiladmin.egiladmin;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.solver.widgets.ResolutionDimension;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Residentes extends AppCompatActivity {
 
@@ -29,11 +24,9 @@ public class Residentes extends AppCompatActivity {
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
     private ListView listViewResidentes;
     private String tipo = "";
-    //private List<Residente> residentes;
 
+    // Variables temporales
     private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
-    private TextView textView3;
-    //private ArrayList<Residente> residente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,12 +156,14 @@ public class Residentes extends AppCompatActivity {
     }
     //LEER RESIDENTES
     public void dialogoLeer() {
+        Intent intent = new Intent(this, VerResidentes.class);
+        startActivity(intent);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+/*        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
 
         LayoutInflater inflater = Residentes.this.getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.dialog_leer_residente, null);
+        View view = inflater.inflate(R.layout.list_residentes, null);
 
         builder.setTitle("Ver Residente");
         builder.setView(view);
@@ -195,7 +190,7 @@ public class Residentes extends AppCompatActivity {
         }
         textView3.setText(texto);
         AlertDialog ad = builder.create();
-        ad.show();
+        ad.show();*/
 
     }
 
