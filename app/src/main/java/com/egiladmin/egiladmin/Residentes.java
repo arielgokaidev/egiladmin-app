@@ -72,6 +72,8 @@ public class Residentes extends AppCompatActivity {
         btnEliminarResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Validacion de parametros ingresados
                 dialogoEliminar();
             }
         });
@@ -222,10 +224,22 @@ public class Residentes extends AppCompatActivity {
                 String apellido = etApellido.getText().toString();
                 String usuario = etUsuario.getText().toString();
                 String password = etPassword.getText().toString();
+                if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!" + rut, Toast.LENGTH_SHORT).show();
+                }else{
+                    // validar campos e insertar
+                  int codigo =  gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
 
-                // validar campos e insertar
-                gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
+
+                    if (codigo == 1) {
+                        Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
             }
         });
 
@@ -265,17 +279,30 @@ public class Residentes extends AppCompatActivity {
         builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
+                String rut = etRut2.getText().toString();
 
-         String rut = etRut2.getText().toString();
-         gestionBD.eliminarResidente(rut);
-         Toast.makeText(getApplicationContext(), "¡Usuario eliminado con éxito!", Toast.LENGTH_SHORT).show();
-                etRut2.setText("");
-                etNombre2.setText("");
-                etApellido2.setText("");
-                etUsuario2.setText("");
-                etPassword2.setText("");
-                etTipo2.setText("");
+                //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
 
+                if (rut.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "¡Debe ingresar un RUT!" + rut, Toast.LENGTH_SHORT).show();
+                }else {
+                    int codigo = gestionBD.eliminarResidente(rut);
+
+                    if (codigo == 1) {
+                        Toast.makeText(getApplicationContext(), "El usuario se ha eliminado con exito", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+                    }
+                    //Limpia campos del activity
+                    etRut2.setText("");
+                    etNombre2.setText("");
+                    etApellido2.setText("");
+                    etUsuario2.setText("");
+                    etPassword2.setText("");
+                    etTipo2.setText("");
+
+                }
             }
         });
 

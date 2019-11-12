@@ -79,15 +79,13 @@ public class GestionBD {
         return residentes;
     }
 
-    public void eliminarResidente(String rut) {
+    public int eliminarResidente(String rut) {
 
-        int cantidad = basedatos.delete("residentes", "rut =" + rut, null);
-
-
-
-
+        int cantidad =  basedatos.delete("residentes", "rut =" + rut, null);
+        //Retorno de valor para validación de parametros en el activity
+    return cantidad;
     }
-    public void actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+    public int actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("nombre", nombre);
@@ -98,7 +96,8 @@ public class GestionBD {
         //
         //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
         int cantidad = basedatos.update("residentes", contentValues, "rut=" + rut, null);
-
+        //Retorno de valor para validación de parametros en el activity
+        return cantidad;
     }
 
     public Cursor leerUnResidente(String rut) {
