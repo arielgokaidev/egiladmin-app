@@ -24,7 +24,7 @@ public class GestionBD {
             "'numero' INTEGER PRIMARY KEY,  " +
             "'torre' VARCHAR(45),  " +
             "'estado' VARCHAR(45),  " +
-            "'residentes_rut' INTEGER,  " +
+            "'residentes_rut' VARCHAR(45),  " +
             "FOREIGN KEY('residentes_rut') REFERENCES 'residentes'('rut')  " +
             ");";
 
@@ -45,6 +45,7 @@ public class GestionBD {
         basedatos = asistenteBD.getWritableDatabase();
     }
 
+    //METODO INSERT RESIDENTE
     public void insertarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
 
         ContentValues contentValues = new ContentValues();
@@ -55,6 +56,17 @@ public class GestionBD {
         contentValues.put("password", password);
         contentValues.put("tipo", tipo);
         basedatos.insert("residentes", null, contentValues);
+
+    }
+    //METODO INSERT DEPARTAMENTO
+    public void insertarDepartamento(String numero, String torre, String estado, String residentes_rut) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("numero", numero);
+        contentValues.put("torre", torre);
+        contentValues.put("estado", estado);
+        contentValues.put("residentes_rut", residentes_rut);
+        basedatos.insert("departamentos", null, contentValues);
 
     }
 
@@ -74,15 +86,33 @@ public class GestionBD {
                 Residente residente = new Residente(rut, nombre, apellido, usuario, password, tipo);
                 residentes.add(residente);
             } while (cursor.moveToNext());
+<<<<<<< HEAD
+=======
+        }else {
+
+            //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
+>>>>>>> 84ef2b88e038bc321ef918deca4f5ad047f57285
         }
         return residentes;
     }
 
+<<<<<<< HEAD
     public void eliminarResidente(String rut) {
         int cantidad = basedatos.delete("residentes", "rut =" + rut, null);
     }
 
     public void actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+=======
+
+
+    public int eliminarResidente(String rut) {
+
+        int cantidad =  basedatos.delete("residentes", "rut =" + rut, null);
+        //Retorno de valor para validación de parametros en el activity
+    return cantidad;
+    }
+    public int actualizarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+>>>>>>> 84ef2b88e038bc321ef918deca4f5ad047f57285
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("nombre", nombre);
@@ -93,7 +123,8 @@ public class GestionBD {
         //
         //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
         int cantidad = basedatos.update("residentes", contentValues, "rut=" + rut, null);
-
+        //Retorno de valor para validación de parametros en el activity
+        return cantidad;
     }
 
     public Cursor leerUnResidente(String rut) {
