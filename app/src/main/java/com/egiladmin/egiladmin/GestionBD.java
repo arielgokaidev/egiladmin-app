@@ -24,7 +24,7 @@ public class GestionBD {
             "'numero' INTEGER PRIMARY KEY,  " +
             "'torre' VARCHAR(45),  " +
             "'estado' VARCHAR(45),  " +
-            "'residentes_rut' INTEGER,  " +
+            "'residentes_rut' VARCHAR(45),  " +
             "FOREIGN KEY('residentes_rut') REFERENCES 'residentes'('rut')  " +
             ");";
 
@@ -45,6 +45,7 @@ public class GestionBD {
         basedatos = asistenteBD.getWritableDatabase();
     }
 
+    //METODO INSERT RESIDENTE
     public void insertarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
 
         ContentValues contentValues = new ContentValues();
@@ -55,6 +56,17 @@ public class GestionBD {
         contentValues.put("password", password);
         contentValues.put("tipo", tipo);
         basedatos.insert("residentes", null, contentValues);
+
+    }
+    //METODO INSERT DEPARTAMENTO
+    public void insertarDepartamento(String numero, String torre, String estado, String residentes_rut) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("numero", numero);
+        contentValues.put("torre", torre);
+        contentValues.put("estado", estado);
+        contentValues.put("residentes_rut", residentes_rut);
+        basedatos.insert("departamentos", null, contentValues);
 
     }
 
@@ -74,10 +86,13 @@ public class GestionBD {
                 residentes.add(new Residente(rut, nombre, apellido, usuario, password, tipo));
             } while (cursor.moveToNext());
         }else {
+
             //Toast.makeText(getApplicationContext(), "No hay datos", Toast.LENGTH_SHORT).show();
         }
         return residentes;
     }
+
+
 
     public int eliminarResidente(String rut) {
 
