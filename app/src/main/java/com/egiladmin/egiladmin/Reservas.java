@@ -317,7 +317,7 @@ public class Reservas extends AppCompatActivity {
         ad.show();
 
     }
-
+/*
     public void buscar(View view){
 
         String rut = etRut2.getText().toString();
@@ -346,7 +346,7 @@ public class Reservas extends AppCompatActivity {
             Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
 }
 

@@ -5,16 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Residentes extends AppCompatActivity {
 
@@ -23,17 +22,15 @@ public class Residentes extends AppCompatActivity {
     private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
     private ListView listViewResidentes;
-    private String tipo = "";
+    private String tipo, rut;
 
-    // Variables temporales
-    private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_residentes);
 
-        // Toolbar
+        // Toolbar y volver atrás
         getSupportActionBar().setTitle("Residentes");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -54,7 +51,7 @@ public class Residentes extends AppCompatActivity {
         btnVerResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogoLeer();
+                activityLeer();
             }
         });
 
@@ -74,23 +71,17 @@ public class Residentes extends AppCompatActivity {
             }
         });
 
-        // INSTANCIACION DE LA BASE DE DATOS
+        // INSTANCIA DE LA BASE DE DATOS
         gestionBD = new GestionBD(this);
-
-        // EditText de prueba
-        etRut2 = findViewById(R.id.etRut2);
-        etNombre2 = findViewById(R.id.etNombre2);
-        etApellido2 = findViewById(R.id.etApellido2);
-        etUsuario2 = findViewById(R.id.etUsuario2);
-        etPassword2 = findViewById(R.id.etPassword2);
-        etTipo2 = findViewById(R.id.etTipo2);
 
     }
 
     //INGRESO RESIDENTES
     public void dialogoIngresar() {
 
+        // Variables para el radiobutton
         final CharSequence tipos[] = {"Dueño", "Arrendatario"};
+        // Reiniciar variable
         tipo = "";
 
         // Constructor AlertDialog
@@ -112,6 +103,7 @@ public class Residentes extends AppCompatActivity {
         builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Guardar tipo seleccionado
                 tipo = tipos[which].toString();
             }
         });
@@ -135,12 +127,7 @@ public class Residentes extends AppCompatActivity {
         });
 
         // Botón cancelar
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
+        builder.setNegativeButton("Cancelar", null);
 
         // Declarar componentes
         etRut = view.findViewById(R.id.etRut);
@@ -150,142 +137,154 @@ public class Residentes extends AppCompatActivity {
         etPassword = view.findViewById(R.id.etPassword);
 
         // Crear AlertDialog
-        AlertDialog ad = builder.create();
+        AlertDialog alertDialog = builder.create();
 
         // Mostrar AlertDialog
-        ad.show();
+        alertDialog.show();
 
     }
-    //LEER RESIDENTES
-    public void dialogoLeer() {
+
+    // ACTIVITY LEER RESIDENTES
+    public void activityLeer() {
         Intent intent = new Intent(this, VerResidentes.class);
         startActivity(intent);
-
-/*        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
-
-        LayoutInflater inflater = Residentes.this.getLayoutInflater();
-
-        View view = inflater.inflate(R.layout.list_residentes, null);
-
-        builder.setTitle("Ver Residente");
-        builder.setView(view);
-
-        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-            }
-        });
-
-        listViewResidentes = view.findViewById(R.id.listViewResidentes);
-        textView3 = view.findViewById(R.id.textView3);
-
-        ArrayList<Residente> residentes = gestionBD.leerResidentes();
-        int cant = residentes.size();
-        Toast.makeText(getApplicationContext(), "Cantidad: " + cant, Toast.LENGTH_SHORT).show();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, residentes);
-
-        listViewResidentes.setAdapter(arrayAdapter);
-        String texto = "";
-        for (int i = 0; i < residentes.size(); i++) {
-            texto += residentes.get(i).toString();
-        }
-        textView3.setText(texto);
-        AlertDialog ad = builder.create();
-        ad.show();*/
-
     }
 
     //ACTUALIZAR RESIDENTES
     public void dialogoActualizar() {
+        // Vaciar rut
+        rut = "";
+        // Select ruts
+        ArrayList<Residente> residentes = gestionBD.leerRuts();
+        // Elementos para radiobutton
+        final CharSequence ruts[] = new CharSequence[residentes.size()];
+        // Setear CharSequence
+        for (int i = 0; i < residentes.size(); i++) {
+            ruts[i] = residentes.get(i).getRut();
+        }
 
-        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
-        tipo = "";
-// Constructor AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
- // Asociación
-        LayoutInflater inflater = Residentes.this.getLayoutInflater();
-// Declarar vista desde layout
-        View view = inflater.inflate(R.layout.dialog_insertar_residente, null);
-// Titulo
-        builder.setTitle("Ingresar Residente");
- // Asignar vista
-        builder.setView(view);
- // Radiobutton
-        builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+
+        builder.setTitle("Seleccione un rut para actualizar");
+
+        // Radiobutton
+        builder.setSingleChoiceItems(ruts, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                tipo = tipos[which].toString();
+                rut = ruts[which].toString();
             }
         });
 
-        // Boton Actualizar
-        builder.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+        // Boton Actualizar sin parametros
+        builder.setPositiveButton("Actualizar", null);
+
+        // Botón cancelar sin parametros
+        builder.setNegativeButton("Cancelar", null);
+
+        AlertDialog alertDialog = builder.create();
+
+        // Listener botones
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                // declarar variables = texto desde input
-                String rut = etRut.getText().toString();
-                String nombre = etNombre.getText().toString();
-                String apellido = etApellido.getText().toString();
-                String usuario = etUsuario.getText().toString();
-                String password = etPassword.getText().toString();
-                if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!" + rut, Toast.LENGTH_SHORT).show();
-                }else{
-                    // validar campos e insertar
-                  int codigo =  gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
-
-
-                    if (codigo == 1) {
-                        Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+            public void onShow(DialogInterface dialog) {
+                // Botón actualizar
+                Button actualizar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                actualizar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Validar selección de rut
+                        if (rut.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "¡Seleccione un rut!" + rut, Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Cerrar dialog
+                            builder.create().cancel();
+                            // Enviar rut a activity
+                            Intent intent = new Intent(getApplicationContext(), ActualizarResidente.class);
+                            intent.putExtra("rut", rut);
+                            startActivity(intent);
+                        }
                     }
-                }
-
-
+                });
             }
         });
 
-        // Botón cancelar
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        // Declarar componentes
-        etRut = view.findViewById(R.id.etRut);
-        etNombre = view.findViewById(R.id.etNombre);
-        etApellido = view.findViewById(R.id.etApellido);
-        etUsuario = view.findViewById(R.id.etUsuario);
-        etPassword = view.findViewById(R.id.etPassword);
-
-        // Crear AlertDialog
-        AlertDialog ad = builder.create();
-
-        // Mostrar AlertDialog
-        ad.show();
-
+        // Validar si existen ruts
+        if (ruts.length > 0) {
+            alertDialog.show();
+        } else {
+            Toast.makeText(getApplicationContext(), "¡No hay residentes registrados!", Toast.LENGTH_LONG).show();
+        }
     }
+
+
     //ELIMINAR RESIDENTES
     public void dialogoEliminar() {
+        rut = "";
+        ArrayList<Residente> residentes = gestionBD.leerRuts();
+        final CharSequence ruts[] = new CharSequence[residentes.size()];
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
+        for (int i = 0; i < residentes.size(); i++) {
+            ruts[i] = residentes.get(i).getRut();
+        }
 
-        LayoutInflater inflater = Residentes.this.getLayoutInflater();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
 
-        builder.setTitle("Eliminar Residente");
-        builder.setView(inflater.inflate(R.layout.dialog_eliminar_residente, null));
+        builder.setTitle("Seleccione un rut para eliminar");
 
-        // BOTON INGRESAR DATOS
+        builder.setSingleChoiceItems(ruts, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                rut = ruts[which].toString();
+            }
+        });
+
+        // Boton Actualizar sin parametros
+        builder.setPositiveButton("Actualizar", null);
+
+        // Botón cancelar sin parametros
+        builder.setNegativeButton("Cancelar", null);
+
+        AlertDialog alertDialog = builder.create();
+
+        // Listener botones
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                // Botón actualizar
+                Button actualizar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                actualizar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Validar selección de rut
+                        if (rut.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "¡Seleccione un rut!" + rut, Toast.LENGTH_SHORT).show();
+                        } else {
+                            int codigo = gestionBD.eliminarResidente(rut);
+
+                            if (codigo == 1) {
+                                Toast.makeText(getApplicationContext(), "¡El usuario se ha eliminado con exito!", Toast.LENGTH_LONG).show();
+                                builder.create().cancel();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        // Validar si existen ruts
+        if (ruts.length > 0) {
+            alertDialog.show();
+        } else {
+            Toast.makeText(getApplicationContext(), "¡No hay residentes registrados!", Toast.LENGTH_LONG).show();
+        }
+/*
+        // BOTON ELIMINAR
         builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                String rut = etRut2.getText().toString();
+                //String rut = etRut2.getText().toString();
 
                 //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
 
@@ -301,57 +300,17 @@ public class Residentes extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
                     }
                     //Limpia campos del activity
-                    etRut2.setText("");
+*//*                    etRut2.setText("");
                     etNombre2.setText("");
                     etApellido2.setText("");
                     etUsuario2.setText("");
                     etPassword2.setText("");
-                    etTipo2.setText("");
+                    etTipo2.setText("");*//*
 
                 }
             }
-        });
+        });*/
 
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        AlertDialog ad = builder.create();
-        ad.show();
 
     }
-
-    public void buscar(View view){
-
-        String rut = etRut2.getText().toString();
-
-        try {
-            if (!rut.isEmpty()) {
-                Cursor cursor = gestionBD.leerUnResidente(rut);
-                if (cursor.moveToFirst()) {
-                    etRut2.setText(cursor.getString(0));
-                    etNombre2.setText(cursor.getString(1));
-                    etApellido2.setText(cursor.getString(2));
-                    etUsuario2.setText(cursor.getString(3));
-                    etPassword2.setText(cursor.getString(4));
-                    etTipo2.setText(cursor.getString(5));
-                }
-            } else {
-                Toast.makeText(this,"Introducir rut",Toast.LENGTH_SHORT).show();
-                etRut2.setText("");
-                etNombre2.setText("");
-                etApellido2.setText("");
-                etUsuario2.setText("");
-                etPassword2.setText("");
-                etTipo2.setText("");
-            }
-        } catch (SQLiteException e) {
-            Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
 }

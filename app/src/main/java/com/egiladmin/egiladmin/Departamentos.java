@@ -160,6 +160,7 @@ public class Departamentos extends AppCompatActivity {
         ad.show();
 
     }
+/*
     //LEER RESIDENTES
     public void dialogoLeer() {
 
@@ -189,7 +190,9 @@ public class Departamentos extends AppCompatActivity {
         ad.show();
 
 
-    }
+    }*/
+
+
     //ACTUALIZAR RESIDENTES
     public void dialogoActualizar() {
 
@@ -317,7 +320,7 @@ public class Departamentos extends AppCompatActivity {
         ad.show();
 
     }
-
+/*
     public void buscar(View view){
 
         String rut = etRut2.getText().toString();
@@ -346,7 +349,7 @@ public class Departamentos extends AppCompatActivity {
             Toast.makeText(this,"El rut no existe",Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
 }
 

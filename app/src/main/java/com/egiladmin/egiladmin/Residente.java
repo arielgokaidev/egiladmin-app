@@ -18,6 +18,10 @@ public class Residente {
         this.setTipo(tipo);
     }
 
+    public Residente(String rut) {
+        this.setRut(rut);
+    }
+
     public String getRut() {
         return rut;
     }

@@ -9,7 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VerResidentes"></activity>
+        <activity
+            android:name=".VerReservas"
+            android:parentActivityName=".Reservas"/>
+        <activity
+            android:name=".VerDepartamentos"
+            android:parentActivityName=".Departamentos"/>
+        <activity
+            android:name=".ActualizarDepartamento"
+            android:parentActivityName=".Departamentos"/>
+        <activity
+            android:name=".ActualizarResidente"
+            android:parentActivityName=".Residentes" />
+        <activity
+            android:name=".VerResidentes"
+            android:parentActivityName=".Residentes" />
         <activity
             android:name=".Reservas"
             android:parentActivityName=".MainActivity" />
@@ -27,7 +41,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -18,6 +18,7 @@ public class AsistenteBD extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(GestionBD.CREAR_TABLA_RESIDENTES);
         sqLiteDatabase.execSQL(GestionBD.CREAR_TABLA_DEPARTAMENTOS);
         sqLiteDatabase.execSQL(GestionBD.CREAR_TABLA_RESERVAS);
+        sqLiteDatabase.execSQL(GestionBD.INSERTAR_DATOS_RESIDENTE);
     }
 
     @Override

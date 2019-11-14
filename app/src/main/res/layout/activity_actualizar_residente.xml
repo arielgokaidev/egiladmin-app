@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActualizarResidente">
+
+    <TextView
+        android:id="@+id/tvRut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50px"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Nombre" />
+
+    <EditText
+        android:id="@+id/etApellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Apellido" />
+
+    <EditText
+        android:id="@+id/etUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Usuario" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="20px"
+        android:layout_marginRight="50px"
+        android:hint="Contraseña" />
+
+    <EditText
+        android:id="@+id/etTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="20px"
+        android:layout_marginRight="50px"
+        android:layout_marginBottom="50px"
+        android:hint="Tipo" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="100px"
+        android:layout_marginRight="100px"
+        android:text="Guardar" />
+</LinearLayout>
