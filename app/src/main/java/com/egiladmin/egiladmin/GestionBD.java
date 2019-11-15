@@ -154,7 +154,7 @@ public class GestionBD {
     // DEPARTAMENTOS
 
     //METODO INSERT DEPARTAMENTO
-    public void insertarDepartamento(String numero, String torre, String estado, String residentes_rut) {
+    public void insertarDepartamento(int numero, String torre, String estado, String residentes_rut) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("numero", numero);
@@ -165,5 +165,74 @@ public class GestionBD {
 
     }
 
+    // METODO SELECT * FROM departamento WHERE numero
+    public ArrayList<Departamento> leerDepartamento(int numero) {
+        String torre, estado, residentes_rut;
+
+        Cursor cursor = basedatos.rawQuery("select * from departamentos where numero ='" + numero + "'", null);
+        ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+        if (cursor.moveToFirst()) {
+            do {
+                numero = cursor.getInt(0);
+                torre = cursor.getString(1);
+                estado = cursor.getString(2);
+                residentes_rut = cursor.getString(3);
+                Departamento departamento = new Departamento(numero, torre, estado, residentes_rut);
+                departamentos.add(departamento);
+            } while (cursor.moveToNext());
+        }
+        return departamentos;
+    }
+
+    // METODO SELECT * FROM DEPARTAMENTOS
+    public ArrayList<Departamento> leerDepartamento() {
+        String torre,estado,residentes_rut;
+        int numero;
+        Cursor cursor = basedatos.rawQuery("select * from departamentos", null);
+        ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+        if (cursor.moveToFirst()) {
+            do {
+                numero = cursor.getInt(0);
+                torre = cursor.getString(1);
+                estado = cursor.getString(2);
+                residentes_rut = cursor.getString(3);
+                Departamento departamento = new Departamento(numero, torre, estado, residentes_rut);
+                departamentos.add(departamento);
+            } while (cursor.moveToNext());
+        }
+        return departamentos;
+    }
+    // METODO UPDATE DEPARTAMENTOS
+    public int actualizarDepartamentos(int numero, String torre, String estado, String rut) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("numero", numero);
+        contentValues.put("torre", torre);
+        contentValues.put("estado", estado);
+        contentValues.put("rut", rut);
+        //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
+        int cantidad = basedatos.update("departamentos", contentValues, "numero='" + numero + "'", null);
+        //Retorno de valor para validación de parametros en el activity
+        return cantidad;
+    }
+    // METODO DELETE DEPARTAMETNO
+    public int eliminarDepartamento(String numero) {
+        int cantidad =  basedatos.delete("departamentos", "numero ='" + numero + "'", null);
+        //Retorno de valor para validación de parametros en el activity
+        return cantidad;
+    }
+    // METODO SELECT numero FROM deptos
+    public ArrayList<Departamento> leerNumero() {
+        int numero;
+        Cursor cursor = basedatos.rawQuery("select numero from departamentos", null);
+        ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+        if (cursor.moveToFirst()) {
+            do {
+                numero = cursor.getInt(0);
+                Departamento departamento = new Departamento(numero);
+                departamentos.add(departamento);
+            } while (cursor.moveToNext());
+        }
+        return departamentos;
+    }
 
 }

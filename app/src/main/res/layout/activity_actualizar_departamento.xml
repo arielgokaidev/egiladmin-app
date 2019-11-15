@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ActualizarDepartamento">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvNumero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50px"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="normal" />
+
+    <EditText
+        android:id="@+id/etNumero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Numero" />
+
+    <EditText
+        android:id="@+id/etTorre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Torre" />
+
+    <EditText
+        android:id="@+id/etEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="50px"
+        android:hint="Estado" />
+
+    <EditText
+        android:id="@+id/etRut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="20px"
+        android:layout_marginRight="50px"
+        android:hint="Rut" />
+
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100px"
+        android:layout_marginTop="100px"
+        android:layout_marginRight="100px"
+        android:text="Guardar" />
+</LinearLayout>

@@ -1,9 +1,8 @@
 package com.egiladmin.egiladmin;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -23,13 +22,14 @@ public class Departamentos extends AppCompatActivity {
 
     // Variables globales
     private GestionBD gestionBD;
-    private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
-    private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
-    private ListView listViewResidentes;
-    private String tipo = "";
-    private List<Residente> residentes;
+    private Button btnIngresarDepartamentos, btnVerDepartamentos, btnActualizarDepartamentos, btnEliminarDepartamentos;
+    private EditText etNumero, etTorre, etEstado, etRut;
+    private ListView listViewDepartamentos;
+    private String numero;
 
-    private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
+    private List<Departamento> departamento;
+    //Departamento String numero, torre, estado, rut;
+    //private EditText etRut2, etNombre2, etApellido2, etUsuario2, etPassword2, etTipo2;
     //private ArrayList<Residente> residente;
 
     @Override
@@ -42,34 +42,34 @@ public class Departamentos extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Botones
-        btnIngresarResidentes = findViewById(R.id.btnIngresarResidentes);
-        btnVerResidentes = findViewById(R.id.btnVerResidentes);
-        btnActualizarResidentes = findViewById(R.id.btnActualizarResidentes);
-        btnEliminarResidentes = findViewById(R.id.btnEliminarResidentes);
+        btnIngresarDepartamentos = findViewById(R.id.btnIngresarDepartamentos);
+        btnVerDepartamentos = findViewById(R.id.btnVerDepartamentos);
+        btnActualizarDepartamentos = findViewById(R.id.btnActualizarDepartamentos);
+        btnEliminarDepartamentos = findViewById(R.id.btnEliminarDepartamentos);
 
         // Listeners
-        btnIngresarResidentes.setOnClickListener(new View.OnClickListener() {
+        btnIngresarDepartamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogoIngresar();
             }
         });
-/*
-        btnVerResidentes.setOnClickListener(new View.OnClickListener() {
+
+        btnVerDepartamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogoLeer();
+                activityLeer();
             }
         });
-*/
-        btnActualizarResidentes.setOnClickListener(new View.OnClickListener() {
+
+        btnActualizarDepartamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialogoActualizar();
             }
         });
 
-        btnEliminarResidentes.setOnClickListener(new View.OnClickListener() {
+        btnEliminarDepartamentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -82,20 +82,20 @@ public class Departamentos extends AppCompatActivity {
         gestionBD = new GestionBD(this);
 
         // EditText de prueba
-        etRut2 = findViewById(R.id.etRut2);
-        etNombre2 = findViewById(R.id.etNombre2);
-        etApellido2 = findViewById(R.id.etApellido2);
-        etUsuario2 = findViewById(R.id.etUsuario2);
-        etPassword2 = findViewById(R.id.etPassword2);
-        etTipo2 = findViewById(R.id.etTipo2);
+        //etRut2 = findViewById(R.id.etRut2);
+       // etNombre2 = findViewById(R.id.etNombre2);
+       // etApellido2 = findViewById(R.id.etApellido2);
+        //etUsuario2 = findViewById(R.id.etUsuario2);
+        //etPassword2 = findViewById(R.id.etPassword2);
+        //etTipo2 = findViewById(R.id.etTipo2);
 
     }
 
     //INGRESO RESIDENTES
     public void dialogoIngresar() {
 
-        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
-        tipo = "";
+        //final CharSequence tipos[] = {"Dueño", "Arrendatario"};
+       // tipo = "";
 
         // Constructor AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(Departamentos.this);
@@ -113,12 +113,12 @@ public class Departamentos extends AppCompatActivity {
         builder.setView(view);
 
         // Radiobutton
-        builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                tipo = tipos[which].toString();
-            }
-        });
+        //builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
+            //@Override
+           // public void onClick(DialogInterface dialog, int which) {
+               // tipo = tipos[which].toString();
+         //   }
+       // });
 
         // Boton Ingresar
         builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
@@ -126,15 +126,15 @@ public class Departamentos extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int which) {
 
                 // declarar variables = texto desde input
+                int numero = Integer.parseInt( etNumero.getText().toString());
+                String torre = etTorre.getText().toString();
+                String estado = etEstado.getText().toString();
                 String rut = etRut.getText().toString();
-                String nombre = etNombre.getText().toString();
-                String apellido = etApellido.getText().toString();
-                String usuario = etUsuario.getText().toString();
-                String password = etPassword.getText().toString();
 
+//Departamento String numero, torre, estado, rut;
                 // validar campos e insertar
-                gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
+                gestionBD.insertarDepartamento(numero, torre, estado, rut);
+                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito! Departametno: "+ numero, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -147,11 +147,11 @@ public class Departamentos extends AppCompatActivity {
         });
 
         // Declarar componentes
+        etNumero = view.findViewById(R.id.etNumero);
+        etTorre = view.findViewById(R.id.etTorre);
+        etEstado = view.findViewById(R.id.etEstado);
         etRut = view.findViewById(R.id.etRut);
-        etNombre = view.findViewById(R.id.etNombre);
-        etApellido = view.findViewById(R.id.etApellido);
-        etUsuario = view.findViewById(R.id.etUsuario);
-        etPassword = view.findViewById(R.id.etPassword);
+
 
         // Crear AlertDialog
         AlertDialog ad = builder.create();
@@ -193,82 +193,76 @@ public class Departamentos extends AppCompatActivity {
     }*/
 
 
+
+
     //ACTUALIZAR RESIDENTES
     public void dialogoActualizar() {
+        // Vaciar rut
+        numero = "";
+        // Select ruts
+        ArrayList<Departamento> departamentos = gestionBD.leerNumero();
+        // Elementos para radiobutton
+        final CharSequence numeros[] = new CharSequence[departamentos.size()];
+        // Setear CharSequence
+        for (int i = 0; i < departamentos.size(); i++) {
 
-        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
-        tipo = "";
-// Constructor AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(Departamentos.this);
-        // Asociación
-        LayoutInflater inflater = Departamentos.this.getLayoutInflater();
-// Declarar vista desde layout
-        View view = inflater.inflate(R.layout.dialog_insertar_residente, null);
-// Titulo
-        builder.setTitle("Actualizar Departamento");
-        // Asignar vista
-        builder.setView(view);
+            numeros[i] = String.valueOf(departamentos.get(i).getNumero());
+        }
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Departamentos.this);
+
+        builder.setTitle("Seleccione un numero dpto para actualizar");
+
         // Radiobutton
-        builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(numeros, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                tipo = tipos[which].toString();
+                numero = numeros[which].toString();
             }
         });
 
-        // Boton Actualizar
-        builder.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+        // Boton Actualizar sin parametros
+        builder.setPositiveButton("Actualizar", null);
+
+        // Botón cancelar sin parametros
+        builder.setNegativeButton("Cancelar", null);
+
+        AlertDialog alertDialog = builder.create();
+
+        // Listener botones
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                // declarar variables = texto desde input
-                String rut = etRut.getText().toString();
-                String nombre = etNombre.getText().toString();
-                String apellido = etApellido.getText().toString();
-                String usuario = etUsuario.getText().toString();
-                String password = etPassword.getText().toString();
-                if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!" + rut, Toast.LENGTH_SHORT).show();
-                }else{
-                    // validar campos e insertar
-                    int codigo =  gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
-
-
-                    if (codigo == 1) {
-                        Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
+            public void onShow(DialogInterface dialog) {
+                // Botón actualizar
+                Button actualizar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                actualizar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Validar selección de rut
+                        if (numero.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "¡Seleccione un Numero dpto!" + numero, Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Cerrar dialog
+                            builder.create().cancel();
+                            // Enviar rut a activity
+                            Intent intent = new Intent(getApplicationContext(), ActualizarDepartamento.class);
+                            intent.putExtra("numero", numero);
+                            startActivity(intent);
+                        }
                     }
-                }
-
-
+                });
             }
         });
 
-        // Botón cancelar
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        // Declarar componentes
-        etRut = view.findViewById(R.id.etRut);
-        etNombre = view.findViewById(R.id.etNombre);
-        etApellido = view.findViewById(R.id.etApellido);
-        etUsuario = view.findViewById(R.id.etUsuario);
-        etPassword = view.findViewById(R.id.etPassword);
-
-        // Crear AlertDialog
-        AlertDialog ad = builder.create();
-
-        // Mostrar AlertDialog
-        ad.show();
-
+        // Validar si existen ruts
+        if (numeros.length > 0) {
+            alertDialog.show();
+        } else {
+            Toast.makeText(getApplicationContext(), "¡No hay Dptos registrados!", Toast.LENGTH_LONG).show();
+        }
     }
-    //ELIMINAR RESIDENTES
+
+    //ELIMINAR depto
     public void dialogoEliminar() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Departamentos.this);
@@ -282,14 +276,14 @@ public class Departamentos extends AppCompatActivity {
         builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                String rut = etRut2.getText().toString();
+                String numero = etNumero.getText().toString();
 
                 //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
 
-                if (rut.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "¡Debe ingresar un RUT!" + rut, Toast.LENGTH_SHORT).show();
+                if (numero.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "¡Debe ingresar un Numero!" + numero, Toast.LENGTH_SHORT).show();
                 }else {
-                    int codigo = gestionBD.eliminarResidente(rut);
+                    int codigo = gestionBD.eliminarDepartamento(numero);
 
                     if (codigo == 1) {
                         Toast.makeText(getApplicationContext(), "El usuario se ha eliminado con exito", Toast.LENGTH_SHORT).show();
@@ -298,12 +292,11 @@ public class Departamentos extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
                     }
                     //Limpia campos del activity
-                    etRut2.setText("");
-                    etNombre2.setText("");
-                    etApellido2.setText("");
-                    etUsuario2.setText("");
-                    etPassword2.setText("");
-                    etTipo2.setText("");
+                    etNumero.setText("");
+                    etTorre.setText("");
+                    etEstado.setText("");
+                    etRut.setText("");
+
 
                 }
             }
@@ -350,6 +343,9 @@ public class Departamentos extends AppCompatActivity {
         }
 
     }*/
-
+public void activityLeer() {
+    Intent intent = new Intent(this, VerDepartamentos.class);
+    startActivity(intent);
+}
 }
 

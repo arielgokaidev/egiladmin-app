@@ -7,7 +7,7 @@ public class Departamento {
     private String estado;
     private String rut;
 
-    public Departamento(int numero, String torre, String estado, String rut) {
+    public Departamento (int numero, String torre, String estado, String rut) {
         this.setNumero(numero);
         this.setTorre(torre);
         this.setEstado(estado);

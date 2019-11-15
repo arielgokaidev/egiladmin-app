@@ -11,33 +11,33 @@
         android:layout_margin="4dp" >
 
         <TextView
-            android:id="@+id/tvRut"
+            android:id="@+id/tvNumero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rut:"
+            android:text="Numero:"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvNombre"
+            android:id="@+id/tvTorre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre:"
+            android:text="Torre:"
             android:textColor="#000000"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvUsuario"
+            android:id="@+id/tvEstado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuario:" />
+            android:text="Estado:" />
 
         <TextView
-            android:id="@+id/tvTipo"
+            android:id="@+id/tvRut"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tipo:" />
+            android:text="Rut:" />
 
     </LinearLayout>
 

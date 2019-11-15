@@ -82,12 +82,12 @@ public class Reservas extends AppCompatActivity {
         gestionBD = new GestionBD(this);
 
         // EditText de prueba
-        etRut2 = findViewById(R.id.etRut2);
-        etNombre2 = findViewById(R.id.etNombre2);
-        etApellido2 = findViewById(R.id.etApellido2);
-        etUsuario2 = findViewById(R.id.etUsuario2);
-        etPassword2 = findViewById(R.id.etPassword2);
-        etTipo2 = findViewById(R.id.etTipo2);
+        //etRut2 = findViewById(R.id.etRut2);
+        //etNombre2 = findViewById(R.id.etNombre2);
+        //etApellido2 = findViewById(R.id.etApellido2);
+        //etUsuario2 = findViewById(R.id.etUsuario2);
+      //  etPassword2 = findViewById(R.id.etPassword2);
+       // etTipo2 = findViewById(R.id.etTipo2);
 
     }
 

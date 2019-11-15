@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="100px"
             android:gravity="center"
-            android:text="Departamentos"
+            android:text="Reservas"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -37,7 +37,7 @@
             android:layout_marginTop="100px"
             android:layout_marginRight="100px"
             android:text="Ver"
-            android:onClick="buscar"/>
+            />
 
         <Button
             android:id="@+id/btnActualizarResidentes"
@@ -56,60 +56,6 @@
             android:layout_marginTop="100px"
             android:layout_marginRight="100px"
             android:text="Eliminar" />
-
-        <EditText
-            android:id="@+id/etRut2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="20px"
-            android:layout_marginRight="20px"
-            android:hint="Rut" />
-
-        <EditText
-            android:id="@+id/etNombre2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="30px"
-            android:layout_marginRight="20px"
-            android:hint="Nombre" />
-
-        <EditText
-            android:id="@+id/etApellido2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="30px"
-            android:layout_marginRight="20px"
-            android:hint="Apellido" />
-
-        <EditText
-            android:id="@+id/etUsuario2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="30px"
-            android:layout_marginRight="20px"
-            android:hint="Usuario" />
-
-        <EditText
-            android:id="@+id/etPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="20px"
-            android:layout_marginRight="20px"
-            android:hint="Contraseña" />
-
-        <EditText
-            android:id="@+id/etTipo2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20px"
-            android:layout_marginTop="20px"
-            android:layout_marginRight="20px"
-            android:hint="Tipo" />
 
     </LinearLayout>
 </ScrollView>
