@@ -32,7 +32,7 @@ public class VerDepartamentos extends AppCompatActivity {
         gestionBD = new GestionBD(this);
 
         ArrayList<Departamento> departamentos;
-        departamentos = gestionBD.leerDepartamento();
+        departamentos = gestionBD.leerDepartamentos();
         adapterDepartamentos = new AdapterDepartamentos(departamentos);
 
         recyclerView.setAdapter(adapterDepartamentos);

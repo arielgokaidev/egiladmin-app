@@ -169,7 +169,7 @@ public class GestionBD {
     public ArrayList<Departamento> leerDepartamento(int numero) {
         String torre, estado, residentes_rut;
 
-        Cursor cursor = basedatos.rawQuery("select * from departamentos where numero ='" + numero + "'", null);
+        Cursor cursor = basedatos.rawQuery("select * from departamentos where numero =" + numero + "", null);
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
         if (cursor.moveToFirst()) {
             do {
@@ -185,7 +185,7 @@ public class GestionBD {
     }
 
     // METODO SELECT * FROM DEPARTAMENTOS
-    public ArrayList<Departamento> leerDepartamento() {
+    public ArrayList<Departamento> leerDepartamentos() {
         String torre,estado,residentes_rut;
         int numero;
         Cursor cursor = basedatos.rawQuery("select * from departamentos", null);
@@ -205,7 +205,6 @@ public class GestionBD {
     // METODO UPDATE DEPARTAMENTOS
     public int actualizarDepartamentos(int numero, String torre, String estado, String rut) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("numero", numero);
         contentValues.put("torre", torre);
         contentValues.put("estado", estado);
         contentValues.put("rut", rut);
@@ -221,7 +220,7 @@ public class GestionBD {
         return cantidad;
     }
     // METODO SELECT numero FROM deptos
-    public ArrayList<Departamento> leerNumero() {
+    public ArrayList<Departamento> leerNumeros() {
         int numero;
         Cursor cursor = basedatos.rawQuery("select numero from departamentos", null);
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();

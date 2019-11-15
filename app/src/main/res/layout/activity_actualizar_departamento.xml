@@ -17,15 +17,6 @@
         android:textStyle="normal" />
 
     <EditText
-        android:id="@+id/etNumero"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50px"
-        android:layout_marginTop="30px"
-        android:layout_marginRight="50px"
-        android:hint="Numero" />
-
-    <EditText
         android:id="@+id/etTorre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

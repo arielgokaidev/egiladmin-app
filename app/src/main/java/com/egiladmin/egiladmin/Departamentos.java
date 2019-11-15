@@ -200,12 +200,11 @@ public class Departamentos extends AppCompatActivity {
         // Vaciar rut
         numero = "";
         // Select ruts
-        ArrayList<Departamento> departamentos = gestionBD.leerNumero();
+        ArrayList<Departamento> departamentos = gestionBD.leerNumeros();
         // Elementos para radiobutton
         final CharSequence numeros[] = new CharSequence[departamentos.size()];
         // Setear CharSequence
         for (int i = 0; i < departamentos.size(); i++) {
-
             numeros[i] = String.valueOf(departamentos.get(i).getNumero());
         }
 

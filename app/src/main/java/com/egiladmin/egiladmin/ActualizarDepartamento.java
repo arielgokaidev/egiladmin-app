@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ActualizarDepartamento extends AppCompatActivity {
 
     private TextView tvNumero;
-    private EditText etNumero, etTorre, etEstado, etRut;
+    private EditText etTorre, etEstado, etRut;
     private Button btnGuardar;
     private GestionBD gestionBD;
     private int numero;
@@ -30,22 +30,19 @@ public class ActualizarDepartamento extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tvNumero = findViewById(R.id.tvNumero);
-        etNumero = findViewById(R.id.etNumero);
         etTorre = findViewById(R.id.etTorre);
-        etEstado = findViewById(R.id.etUsuario);
+        etEstado = findViewById(R.id.etEstado);
         etRut = findViewById(R.id.etRut);
         btnGuardar = findViewById(R.id.btnGuardar);
 
         numero = Integer.parseInt(getIntent().getStringExtra("numero")) ;
-        tvNumero.setText(numero);
+        tvNumero.setText(getIntent().getStringExtra("numero"));
 
         gestionBD = new GestionBD(this);
         ArrayList<Departamento> departamento =  gestionBD.leerDepartamento(numero);
-        etNumero.setText(departamento.get(0).getNumero());
         etTorre.setText(departamento.get(0).getTorre());
         etEstado.setText(departamento.get(0).getEstado());
         etRut.setText(departamento.get(0).getRut());
-
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +59,7 @@ public class ActualizarDepartamento extends AppCompatActivity {
         String rut = etRut.getText().toString();
 
         // validar campos e insertar
-        if (numero ==0 || torre.isEmpty() || estado.isEmpty() || rut.isEmpty()) {
+        if (torre.isEmpty() || estado.isEmpty() || rut.isEmpty()) {
             Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!", Toast.LENGTH_SHORT).show();
         } else{
             int codigo =  gestionBD.actualizarDepartamentos(numero, torre, estado, rut);
