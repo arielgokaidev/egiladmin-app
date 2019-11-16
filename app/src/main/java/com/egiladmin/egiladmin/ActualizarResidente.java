@@ -69,7 +69,7 @@ public class ActualizarResidente extends AppCompatActivity {
         } else{
             int codigo =  gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
             // Codigo de retorno
-            if (codigo == 1) {
+            if (codigo > 0) {
                 Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getApplicationContext(), Residentes.class);
                 startActivity(intent);

@@ -192,16 +192,15 @@ public class Reservas extends AppCompatActivity {
     }
     //ACTUALIZAR RESIDENTES
     public void dialogoActualizar() {
-
         final CharSequence tipos[] = {"Dueño", "Arrendatario"};
         tipo = "";
-// Constructor AlertDialog
+        // Constructor AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(Reservas.this);
         // Asociación
         LayoutInflater inflater = Reservas.this.getLayoutInflater();
-// Declarar vista desde layout
+        // Declarar vista desde layout
         View view = inflater.inflate(R.layout.dialog_insertar_reserva, null);
-// Titulo
+        // Titulo
         builder.setTitle("Actualizar Reservas");
         // Asignar vista
         builder.setView(view);
@@ -212,12 +211,10 @@ public class Reservas extends AppCompatActivity {
                 tipo = tipos[which].toString();
             }
         });
-
         // Boton Actualizar
         builder.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-
                 // declarar variables = texto desde input
                 String rut = etRut.getText().toString();
                 String nombre = etNombre.getText().toString();
@@ -226,41 +223,26 @@ public class Reservas extends AppCompatActivity {
                 String password = etPassword.getText().toString();
                 if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!" + rut, Toast.LENGTH_SHORT).show();
-                }else{
-                    // validar campos e insertar
+                } else {
                     int codigo =  gestionBD.actualizarResidente(rut, nombre, apellido, usuario, password, tipo);
-
-
                     if (codigo == 1) {
                         Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
-
                     } else {
                         Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
                     }
                 }
-
-
             }
         });
-
         // Botón cancelar
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
+        builder.setNegativeButton("Cancelar", null);
         // Declarar componentes
         etRut = view.findViewById(R.id.etRut);
         etNombre = view.findViewById(R.id.etNombre);
         etApellido = view.findViewById(R.id.etApellido);
         etUsuario = view.findViewById(R.id.etUsuario);
         etPassword = view.findViewById(R.id.etPassword);
-
         // Crear AlertDialog
         AlertDialog ad = builder.create();
-
         // Mostrar AlertDialog
         ad.show();
 

@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class Residentes extends AppCompatActivity {
     private GestionBD gestionBD;
     private Button btnIngresarResidentes, btnVerResidentes, btnActualizarResidentes, btnEliminarResidentes;
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
-    private ListView listViewResidentes;
+    private RadioGroup rgTipo;
+    private RadioButton rbTipo;
     private String tipo, rut;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,6 @@ public class Residentes extends AppCompatActivity {
         btnEliminarResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //Validacion de parametros ingresados
                 dialogoEliminar();
             }
         });
@@ -82,7 +81,7 @@ public class Residentes extends AppCompatActivity {
         // Variables para el radiobutton
         final CharSequence tipos[] = {"Dueño", "Arrendatario"};
         // Reiniciar variable
-        tipo = "";
+        //tipo = "";
 
         // Constructor AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
@@ -99,32 +98,17 @@ public class Residentes extends AppCompatActivity {
         // Asignar vista
         builder.setView(view);
 
-        // Radiobutton
+/*        // Radiobutton
         builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Guardar tipo seleccionado
                 tipo = tipos[which].toString();
             }
-        });
+        });*/
 
         // Boton Ingresar
-        builder.setPositiveButton("Ingresar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-
-                // declarar variables = texto desde input
-                String rut = etRut.getText().toString();
-                String nombre = etNombre.getText().toString();
-                String apellido = etApellido.getText().toString();
-                String usuario = etUsuario.getText().toString();
-                String password = etPassword.getText().toString();
-
-                // validar campos e insertar
-                gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
-                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito! Rut: "+ rut, Toast.LENGTH_SHORT).show();
-            }
-        });
+        builder.setPositiveButton("Ingresar", null);
 
         // Botón cancelar
         builder.setNegativeButton("Cancelar", null);
@@ -135,9 +119,43 @@ public class Residentes extends AppCompatActivity {
         etApellido = view.findViewById(R.id.etApellido);
         etUsuario = view.findViewById(R.id.etUsuario);
         etPassword = view.findViewById(R.id.etPassword);
+        rgTipo = view.findViewById(R.id.rgTipo);
 
         // Crear AlertDialog
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button ingresar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                ingresar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        long codigo = 0;
+                        String rut = etRut.getText().toString();
+                        String nombre = etNombre.getText().toString();
+                        String apellido = etApellido.getText().toString();
+                        String usuario = etUsuario.getText().toString();
+                        String password = etPassword.getText().toString();
+                        int radioId = rgTipo.getCheckedRadioButtonId();
+                        rbTipo = findViewById(radioId);
+                        Toast.makeText(getApplicationContext(),"" + rbTipo, Toast.LENGTH_SHORT).show();
+                        //String tipo = rbTipo.getText().toString();
+                        if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
+                            Toast.makeText(getApplicationContext(),"¡Debe completar todos los campos!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            codigo = gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
+                            if (codigo > -1) {
+                                alertDialog.cancel();
+                                Toast.makeText(getApplicationContext(), "¡Datos ingresados con éxito!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "¡Error al ingresar datos!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+            }
+        });
 
         // Mostrar AlertDialog
         alertDialog.show();
@@ -181,7 +199,7 @@ public class Residentes extends AppCompatActivity {
         // Botón cancelar sin parametros
         builder.setNegativeButton("Cancelar", null);
 
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
 
         // Listener botones
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -197,7 +215,7 @@ public class Residentes extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "¡Seleccione un rut!" + rut, Toast.LENGTH_SHORT).show();
                         } else {
                             // Cerrar dialog
-                            builder.create().cancel();
+                            alertDialog.cancel();
                             // Enviar rut a activity
                             Intent intent = new Intent(getApplicationContext(), ActualizarResidente.class);
                             intent.putExtra("rut", rut);
@@ -239,20 +257,18 @@ public class Residentes extends AppCompatActivity {
         });
 
         // Boton Actualizar sin parametros
-        builder.setPositiveButton("Actualizar", null);
+        builder.setPositiveButton("Eliminar", null);
 
         // Botón cancelar sin parametros
         builder.setNegativeButton("Cancelar", null);
 
-        AlertDialog alertDialog = builder.create();
+        final AlertDialog alertDialog = builder.create();
 
-        // Listener botones
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
-                // Botón actualizar
-                Button actualizar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                actualizar.setOnClickListener(new View.OnClickListener() {
+                Button eliminar = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                eliminar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // Validar selección de rut
@@ -260,10 +276,9 @@ public class Residentes extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "¡Seleccione un rut!" + rut, Toast.LENGTH_SHORT).show();
                         } else {
                             int codigo = gestionBD.eliminarResidente(rut);
-
-                            if (codigo == 1) {
-                                Toast.makeText(getApplicationContext(), "¡El usuario se ha eliminado con exito!", Toast.LENGTH_LONG).show();
-                                builder.create().cancel();
+                            if (codigo > 0) {
+                                alertDialog.cancel();
+                                Toast.makeText(getApplicationContext(), "¡El usuario se ha eliminado con exito!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
                             }
@@ -279,38 +294,6 @@ public class Residentes extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "¡No hay residentes registrados!", Toast.LENGTH_LONG).show();
         }
-/*
-        // BOTON ELIMINAR
-        builder.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                //String rut = etRut2.getText().toString();
-
-                //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
-
-                if (rut.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "¡Debe ingresar un RUT!" + rut, Toast.LENGTH_SHORT).show();
-                }else {
-                    int codigo = gestionBD.eliminarResidente(rut);
-
-                    if (codigo == 1) {
-                        Toast.makeText(getApplicationContext(), "El usuario se ha eliminado con exito", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_SHORT).show();
-                    }
-                    //Limpia campos del activity
-*//*                    etRut2.setText("");
-                    etNombre2.setText("");
-                    etApellido2.setText("");
-                    etUsuario2.setText("");
-                    etPassword2.setText("");
-                    etTipo2.setText("");*//*
-
-                }
-            }
-        });*/
-
 
     }
 }

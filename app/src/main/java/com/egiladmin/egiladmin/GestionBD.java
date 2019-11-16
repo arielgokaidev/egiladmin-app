@@ -64,7 +64,8 @@ public class GestionBD {
     // RESIDENTES
 
     //METODO INSERT RESIDENTE
-    public void insertarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+    public long insertarResidente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
+        long codigo = 0;
         ContentValues contentValues = new ContentValues();
         contentValues.put("rut", rut);
         contentValues.put("nombre", nombre);
@@ -72,7 +73,8 @@ public class GestionBD {
         contentValues.put("usuario", usuario);
         contentValues.put("password", password);
         contentValues.put("tipo", tipo);
-        basedatos.insert("residentes", null, contentValues);
+        codigo = basedatos.insert("residentes", null, contentValues);
+        return codigo;
     }
 
     // METODO SELECT * FROM RESIDENTES
@@ -155,14 +157,12 @@ public class GestionBD {
 
     //METODO INSERT DEPARTAMENTO
     public void insertarDepartamento(int numero, String torre, String estado, String residentes_rut) {
-
         ContentValues contentValues = new ContentValues();
         contentValues.put("numero", numero);
         contentValues.put("torre", torre);
         contentValues.put("estado", estado);
         contentValues.put("residentes_rut", residentes_rut);
         basedatos.insert("departamentos", null, contentValues);
-
     }
 
     // METODO SELECT * FROM departamento WHERE numero
