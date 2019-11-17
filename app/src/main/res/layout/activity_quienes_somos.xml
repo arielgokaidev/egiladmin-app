@@ -7,13 +7,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuienesSomos"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/quienessomos"
+    >
+
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quienes somos" />
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:layout_marginRight="30px"
+        android:text="Grupo: Ariel Lizana - Yirman Sereño."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="Tema:Sistema de agendamiento de espacios comunes para edificios." />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="Docente: German Riveros" />
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:text="Presentación EPE2" />
+
 </LinearLayout>
 
 
