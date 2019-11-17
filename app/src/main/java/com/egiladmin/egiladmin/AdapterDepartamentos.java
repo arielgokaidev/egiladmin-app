@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamentos.DepartamentosViewHolder> {
 
     private ArrayList<Departamento> departamento;
-    String numero, torre, estado, rut;
-    //Departamento String numero, torre, estado, rut;
+    String numero, torre, estado, rut, nombre, tipo;
+
     public class DepartamentosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNumero, tvTorre, tvEstado, tvRut;
+        TextView tvNumero, tvTorre, tvEstado, tvRut, tvNombre, tvTipo;
 
         public DepartamentosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -25,6 +25,8 @@ public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamen
             tvTorre = itemView.findViewById(R.id.tvTorre);
             tvEstado = itemView.findViewById(R.id.tvEstado);
             tvRut = itemView.findViewById(R.id.tvRut);
+            tvNombre = itemView.findViewById(R.id.tvNombre);
+            tvTipo = itemView.findViewById(R.id.tvTipo);
         }
 
     }
@@ -48,10 +50,14 @@ public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamen
         torre = "Torre: " + currentItem.getTorre();
         estado = "Estado: " + currentItem.getEstado();
         rut = "Rut: " + currentItem.getRut();
+        nombre = "Nombre: " + currentItem.getNombre() + " " + currentItem.getApellido();
+        tipo = "Tipo residente: " + currentItem.getTipo();
         holder.tvNumero.setText(numero);
         holder.tvTorre.setText(torre);
         holder.tvEstado.setText(estado);
         holder.tvRut.setText(rut);
+        holder.tvNombre.setText(nombre);
+        holder.tvTipo.setText(tipo);
     }
 
     @Override

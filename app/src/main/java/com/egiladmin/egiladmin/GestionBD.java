@@ -35,7 +35,7 @@ public class GestionBD {
             " FOREIGN KEY('departamentos_numero') REFERENCES 'departamentos'('numero')  " +
             ");";
 
-    public static final String INSERTAR_DATOS_RESIDENTE = "INSERT INTO RESIDENTES VALUES " +
+    public static final String INSERTAR_DATOS_RESIDENTE_1 = "INSERT INTO RESIDENTES VALUES " +
             "(" +
             "'17103342-K'," +
             "'Ariel'," +
@@ -43,14 +43,32 @@ public class GestionBD {
             "'ariel'," +
             "'123'," +
             "'Dueño'" +
-            "),"+
+            ");";
+
+    public static final String INSERTAR_DATOS_RESIDENTE_2 = "INSERT INTO RESIDENTES VALUES " +
             "("+
-            "'16xxxxxx-x'," +
+            "'16000000-0'," +
             "'Yirman'," +
             "'Sereño'," +
             "'yirman'," +
             "'123'," +
             "'Arrendatario'" +
+            ");";
+
+    public static final String INSERTAR_DATOS_DEPARTAMENTO_1 = "INSERT INTO DEPARTAMENTOS VALUES " +
+            "("+
+            "101," +
+            "'A'," +
+            "'Ocupado'," +
+            "'16000000-0'" +
+            ");";
+
+    public static final String INSERTAR_DATOS_DEPARTAMENTO_2 = "INSERT INTO DEPARTAMENTOS VALUES " +
+            "("+
+            "151," +
+            "'B'," +
+            "'Vacaciones'," +
+            "'17103342-K'" +
             ");";
 
     public AsistenteBD asistenteBD;
@@ -156,13 +174,15 @@ public class GestionBD {
     // DEPARTAMENTOS
 
     //METODO INSERT DEPARTAMENTO
-    public void insertarDepartamento(int numero, String torre, String estado, String residentes_rut) {
+    public long insertarDepartamento(int numero, String torre, String estado, String residentes_rut) {
+        long codigo = 0;
         ContentValues contentValues = new ContentValues();
         contentValues.put("numero", numero);
         contentValues.put("torre", torre);
         contentValues.put("estado", estado);
         contentValues.put("residentes_rut", residentes_rut);
-        basedatos.insert("departamentos", null, contentValues);
+        codigo = basedatos.insert("departamentos", null, contentValues);
+        return codigo;
     }
 
     // METODO SELECT * FROM departamento WHERE numero
@@ -184,11 +204,12 @@ public class GestionBD {
         return departamentos;
     }
 
-    // METODO SELECT * FROM DEPARTAMENTOS
+    // METODO SELECT * FROM DEPARTAMENTOS INNER JOIN RESIDENTES
     public ArrayList<Departamento> leerDepartamentos() {
-        String torre,estado,residentes_rut;
+        String torre, estado, residentes_rut, nombre, apellido, tipo;
         int numero;
-        Cursor cursor = basedatos.rawQuery("select * from departamentos", null);
+        String query = "select numero, torre, estado, residentes_rut, nombre, apellido, tipo from departamentos inner join residentes on residentes.rut = departamentos.residentes_rut";
+        Cursor cursor = basedatos.rawQuery(query, null);
         ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
         if (cursor.moveToFirst()) {
             do {
@@ -196,20 +217,22 @@ public class GestionBD {
                 torre = cursor.getString(1);
                 estado = cursor.getString(2);
                 residentes_rut = cursor.getString(3);
-                Departamento departamento = new Departamento(numero, torre, estado, residentes_rut);
+                nombre = cursor.getString(4);
+                apellido = cursor.getString(5);
+                tipo = cursor.getString(6);
+                Departamento departamento = new Departamento(numero, torre, estado, residentes_rut, nombre, apellido, tipo);
                 departamentos.add(departamento);
             } while (cursor.moveToNext());
         }
         return departamentos;
     }
     // METODO UPDATE DEPARTAMENTOS
-    public int actualizarDepartamentos(int numero, String torre, String estado, String rut) {
+    public int actualizarDepartamentos(int numero, String torre, String estado) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("torre", torre);
         contentValues.put("estado", estado);
-        contentValues.put("rut", rut);
         //el metodo retorna un entero, la cantidad de elementos eliminados (cantidad)
-        int cantidad = basedatos.update("departamentos", contentValues, "numero='" + numero + "'", null);
+        int cantidad = basedatos.update("departamentos", contentValues, "numero =" + numero, null);
         //Retorno de valor para validación de parametros en el activity
         return cantidad;
     }

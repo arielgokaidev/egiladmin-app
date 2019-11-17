@@ -39,6 +39,18 @@
             android:layout_height="wrap_content"
             android:text="Rut:" />
 
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre:" />
+
+        <TextView
+            android:id="@+id/tvTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo:" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

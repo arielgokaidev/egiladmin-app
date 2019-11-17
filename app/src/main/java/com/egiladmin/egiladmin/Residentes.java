@@ -24,7 +24,7 @@ public class Residentes extends AppCompatActivity {
     private EditText etRut, etNombre, etApellido, etUsuario, etPassword;
     private RadioGroup rgTipo;
     private RadioButton rbTipo;
-    private String tipo, rut;
+    private String rut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +78,6 @@ public class Residentes extends AppCompatActivity {
     //INGRESO RESIDENTES
     public void dialogoIngresar() {
 
-        // Variables para el radiobutton
-        final CharSequence tipos[] = {"Dueño", "Arrendatario"};
-        // Reiniciar variable
-        //tipo = "";
-
         // Constructor AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(Residentes.this);
 
@@ -90,22 +85,13 @@ public class Residentes extends AppCompatActivity {
         LayoutInflater inflater = Residentes.this.getLayoutInflater();
 
         // Declarar vista desde layout
-        View view = inflater.inflate(R.layout.dialog_insertar_residente, null);
+        final View view = inflater.inflate(R.layout.dialog_insertar_residente, null);
 
         // Titulo
         builder.setTitle("Ingresar Residente");
 
         // Asignar vista
         builder.setView(view);
-
-/*        // Radiobutton
-        builder.setSingleChoiceItems(tipos, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Guardar tipo seleccionado
-                tipo = tipos[which].toString();
-            }
-        });*/
 
         // Boton Ingresar
         builder.setPositiveButton("Ingresar", null);
@@ -137,11 +123,13 @@ public class Residentes extends AppCompatActivity {
                         String apellido = etApellido.getText().toString();
                         String usuario = etUsuario.getText().toString();
                         String password = etPassword.getText().toString();
+                        String tipo = "";
                         int radioId = rgTipo.getCheckedRadioButtonId();
-                        rbTipo = findViewById(radioId);
-                        Toast.makeText(getApplicationContext(),"" + rbTipo, Toast.LENGTH_SHORT).show();
-                        //String tipo = rbTipo.getText().toString();
-                        if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty()) {
+                        if (radioId != -1) {
+                            rbTipo = view.findViewById(radioId);
+                            tipo = rbTipo.getText().toString();
+                        }
+                        if (rut.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || password.isEmpty() || tipo.isEmpty()) {
                             Toast.makeText(getApplicationContext(),"¡Debe completar todos los campos!", Toast.LENGTH_SHORT).show();
                         } else {
                             codigo = gestionBD.insertarResidente(rut, nombre, apellido, usuario, password, tipo);
@@ -273,7 +261,7 @@ public class Residentes extends AppCompatActivity {
                     public void onClick(View v) {
                         // Validar selección de rut
                         if (rut.isEmpty()) {
-                            Toast.makeText(getApplicationContext(), "¡Seleccione un rut!" + rut, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "¡Seleccione un rut!", Toast.LENGTH_SHORT).show();
                         } else {
                             int codigo = gestionBD.eliminarResidente(rut);
                             if (codigo > 0) {

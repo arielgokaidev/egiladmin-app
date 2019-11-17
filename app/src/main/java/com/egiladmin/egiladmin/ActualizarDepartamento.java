@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ActualizarDepartamento extends AppCompatActivity {
 
     private TextView tvNumero;
-    private EditText etTorre, etEstado, etRut;
+    private EditText etTorre, etEstado;
     private Button btnGuardar;
     private GestionBD gestionBD;
     private int numero;
@@ -32,7 +32,6 @@ public class ActualizarDepartamento extends AppCompatActivity {
         tvNumero = findViewById(R.id.tvNumero);
         etTorre = findViewById(R.id.etTorre);
         etEstado = findViewById(R.id.etEstado);
-        etRut = findViewById(R.id.etRut);
         btnGuardar = findViewById(R.id.btnGuardar);
 
         numero = Integer.parseInt(getIntent().getStringExtra("numero")) ;
@@ -42,7 +41,6 @@ public class ActualizarDepartamento extends AppCompatActivity {
         ArrayList<Departamento> departamento =  gestionBD.leerDepartamento(numero);
         etTorre.setText(departamento.get(0).getTorre());
         etEstado.setText(departamento.get(0).getEstado());
-        etRut.setText(departamento.get(0).getRut());
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +54,12 @@ public class ActualizarDepartamento extends AppCompatActivity {
         int numero = this.numero;
         String torre = etTorre.getText().toString();
         String estado = etEstado.getText().toString();
-        String rut = etRut.getText().toString();
 
         // validar campos e insertar
-        if (torre.isEmpty() || estado.isEmpty() || rut.isEmpty()) {
+        if (torre.isEmpty() || estado.isEmpty()) {
             Toast.makeText(getApplicationContext(), "¡Debe completar todos los campos!", Toast.LENGTH_SHORT).show();
         } else{
-            int codigo =  gestionBD.actualizarDepartamentos(numero, torre, estado, rut);
+            int codigo =  gestionBD.actualizarDepartamentos(numero, torre, estado);
             // Codigo de retorno
             if (codigo == 1) {
                 Toast.makeText(getApplicationContext(), "¡Datos Actualizados con éxito! Numero: "+ numero, Toast.LENGTH_LONG).show();

@@ -1,11 +1,23 @@
 package com.egiladmin.egiladmin;
 
-public class Departamento {
+public class Departamento extends Residente {
 
     private int numero;
     private String torre;
     private String estado;
     private String rut;
+
+    public Departamento() {
+        super();
+    }
+
+    public Departamento (int numero, String torre, String estado, String rut, String nombre, String apellido, String tipo) {
+        super(rut, nombre, apellido, tipo);
+        this.setNumero(numero);
+        this.setTorre(torre);
+        this.setEstado(estado);
+        this.setRut(rut);
+    }
 
     public Departamento (int numero, String torre, String estado, String rut) {
         this.setNumero(numero);

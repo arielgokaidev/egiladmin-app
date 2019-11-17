@@ -2,12 +2,14 @@ package com.egiladmin.egiladmin;
 
 public class Residente {
 
-    private String rut;
-    private String nombre;
-    private String apellido;
+    protected String rut;
+    protected String nombre;
+    protected String apellido;
     private String usuario;
     private String password;
-    private String tipo;
+    protected String tipo;
+    
+    public Residente() {};
 
     public Residente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
         this.setRut(rut);
@@ -20,6 +22,13 @@ public class Residente {
 
     public Residente(String rut) {
         this.setRut(rut);
+    }
+
+    public Residente(String rut, String nombre, String apellido, String tipo) {
+        this.setRut(rut);
+        this.setNombre(nombre);
+        this.setApellido(apellido);
+        this.setTipo(tipo);
     }
 
     public String getRut() {

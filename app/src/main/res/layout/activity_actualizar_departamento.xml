@@ -34,16 +34,6 @@
         android:layout_marginRight="50px"
         android:hint="Estado" />
 
-    <EditText
-        android:id="@+id/etRut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50px"
-        android:layout_marginTop="20px"
-        android:layout_marginRight="50px"
-        android:hint="Rut" />
-
-
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
