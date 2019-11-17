@@ -10,14 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".IngresarReserva"
+            android:parentActivityName=".Reservas" />
+        <activity
             android:name=".VerReservas"
-            android:parentActivityName=".Reservas"/>
+            android:parentActivityName=".Reservas" />
         <activity
             android:name=".VerDepartamentos"
-            android:parentActivityName=".Departamentos"/>
+            android:parentActivityName=".Departamentos" />
         <activity
             android:name=".ActualizarDepartamento"
-            android:parentActivityName=".Departamentos"/>
+            android:parentActivityName=".Departamentos" />
         <activity
             android:name=".ActualizarResidente"
             android:parentActivityName=".Residentes" />
@@ -41,6 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

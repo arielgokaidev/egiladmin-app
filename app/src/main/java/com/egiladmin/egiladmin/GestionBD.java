@@ -28,9 +28,9 @@ public class GestionBD {
 
     public static final String CREAR_TABLA_RESERVAS = "CREATE TABLE 'reservas' (  " +
             " 'idreserva' INTEGER PRIMARY KEY AUTOINCREMENT,  " +
-            " 'fecha' DATE,  " +
-            " 'hora' TIME,  " +
-            " 'valor' INT,  " +
+            " 'fecha' VARCHAR(45),  " +
+            " 'hora' VARCHAR(45),  " +
+            " 'valor' VARCHAR(45),  " +
             " 'departamentos_numero' INTEGER,  " +
             " FOREIGN KEY('departamentos_numero') REFERENCES 'departamentos'('numero')  " +
             ");";
@@ -255,6 +255,18 @@ public class GestionBD {
             } while (cursor.moveToNext());
         }
         return departamentos;
+    }
+
+    //METODO INSERT RESERVA
+    public long insertarReserva(String fecha, String hora, String turno, int departamentos_numero) {
+        long codigo = 0;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("fecha", fecha);
+        contentValues.put("hora", hora);
+        contentValues.put("turno", turno);
+        contentValues.put("departamentos_numero", departamentos_numero);
+        codigo = basedatos.insert("reservas", null, contentValues);
+        return codigo;
     }
 
 }
