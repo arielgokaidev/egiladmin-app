@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamentos.DepartamentosViewHolder> {
 
-    private ArrayList<Departamento> departamento;
+    private ArrayList<Departamento> departamentos;
     String numero, torre, estado, rut, nombre, tipo;
 
     public class DepartamentosViewHolder extends RecyclerView.ViewHolder {
@@ -31,8 +31,8 @@ public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamen
 
     }
 
-    public AdapterDepartamentos(ArrayList<Departamento> departamento) {
-        this.departamento = departamento;
+    public AdapterDepartamentos(ArrayList<Departamento> departamentos) {
+        this.departamentos = departamentos;
     }
 
     @NonNull
@@ -45,7 +45,7 @@ public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamen
 
     @Override
     public void onBindViewHolder(@NonNull DepartamentosViewHolder holder, int position) {
-        Departamento currentItem = departamento.get(position);
+        Departamento currentItem = departamentos.get(position);
         numero = "Numero: " + currentItem.getNumero();
         torre = "Torre: " + currentItem.getTorre();
         estado = "Estado: " + currentItem.getEstado();
@@ -62,10 +62,7 @@ public class AdapterDepartamentos extends RecyclerView.Adapter<AdapterDepartamen
 
     @Override
     public int getItemCount() {
-        return departamento.size();
+        return departamentos.size();
     }
-
-
-
 
 }

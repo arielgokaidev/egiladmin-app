@@ -3,7 +3,7 @@ package com.egiladmin.egiladmin;
 public class Departamento extends Residente {
 
     private int numero;
-    private String torre;
+    protected String torre;
     private String estado;
     private String rut;
 
@@ -28,6 +28,11 @@ public class Departamento extends Residente {
 
     public Departamento(int numero) {
         this.setNumero(numero);
+    }
+
+    public Departamento(String torre, String nombre, String apellido) {
+        super(nombre, apellido);
+        this.setTorre(torre);
     }
 
     public int getNumero() {

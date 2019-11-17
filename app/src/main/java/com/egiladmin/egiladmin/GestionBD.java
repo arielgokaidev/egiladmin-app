@@ -30,7 +30,7 @@ public class GestionBD {
             " 'idreserva' INTEGER PRIMARY KEY AUTOINCREMENT,  " +
             " 'fecha' VARCHAR(45),  " +
             " 'hora' VARCHAR(45),  " +
-            " 'valor' VARCHAR(45),  " +
+            " 'turno' VARCHAR(45),  " +
             " 'departamentos_numero' INTEGER,  " +
             " FOREIGN KEY('departamentos_numero') REFERENCES 'departamentos'('numero')  " +
             ");";
@@ -267,6 +267,32 @@ public class GestionBD {
         contentValues.put("departamentos_numero", departamentos_numero);
         codigo = basedatos.insert("reservas", null, contentValues);
         return codigo;
+    }
+
+    // METODO SELECT * FROM RESERVAS
+    public ArrayList<Reserva> leerReservas() {
+        int id, departamento;
+        String fecha, hora, turno, torre, nombre, apellido;
+        String query = "select idreserva, fecha, hora, turno, departamentos_numero, torre, nombre, apellido from reservas " +
+                "inner join departamentos on reservas.departamentos_numero = departamentos.numero " +
+                "inner join residentes on departamentos.residentes_rut = residentes.rut";
+        Cursor cursor = basedatos.rawQuery(query, null);
+        ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+        if (cursor.moveToFirst()) {
+            do {
+                id = cursor.getInt(0);
+                fecha = cursor.getString(1);
+                hora = cursor.getString(2);
+                turno = cursor.getString(3);
+                departamento = cursor.getInt(4);
+                torre = cursor.getString(5);
+                nombre = cursor.getString(6);
+                apellido = cursor.getString(7);
+                Reserva reserva = new Reserva(id, fecha, hora, turno, departamento, torre, nombre, apellido);
+                reservas.add(reserva);
+            } while (cursor.moveToNext());
+        }
+        return reservas;
     }
 
 }

@@ -31,6 +31,11 @@ public class Residente {
         this.setTipo(tipo);
     }
 
+    public Residente(String nombre, String apellido) {
+        this.setNombre(nombre);
+        this.setApellido(apellido);
+    }
+
     public String getRut() {
         return rut;
     }

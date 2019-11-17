@@ -11,33 +11,39 @@
         android:layout_margin="4dp" >
 
         <TextView
-            android:id="@+id/tvRut"
+            android:id="@+id/tvFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rut:"
+            android:text="Fecha:"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvNombre"
+            android:id="@+id/tvHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre:"
+            android:text="Hora:"
             android:textColor="#000000"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvUsuario"
+            android:id="@+id/tvTurno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Usuario:" />
+            android:text="Turno:" />
 
         <TextView
-            android:id="@+id/tvTipo"
+            android:id="@+id/tvDepartamento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tipo:" />
+            android:text="Departamento:" />
+
+        <TextView
+            android:id="@+id/tvResidente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Residente:" />
 
     </LinearLayout>
 

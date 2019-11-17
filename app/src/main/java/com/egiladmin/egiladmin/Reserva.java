@@ -1,18 +1,27 @@
 package com.egiladmin.egiladmin;
 
-public class Reserva {
+public class Reserva extends Departamento {
 
     private int id;
     private String fecha;
     private String hora;
-    private int valor;
+    private String turno;
     private int departamento;
 
-    public Reserva(int id, String fecha, String hora, int valor, int departamento) {
+    public Reserva(int id, String fecha, String hora, String turno, int departamento) {
         this.setId(id);
         this.setFecha(fecha);
         this.setHora(hora);
-        this.setValor(valor);
+        this.setTurno(turno);
+        this.setDepartamento(departamento);
+    }
+
+    public Reserva(int id, String fecha, String hora, String turno, int departamento, String torre, String nombre, String apellido) {
+        super(torre, nombre, apellido);
+        this.setId(id);
+        this.setFecha(fecha);
+        this.setHora(hora);
+        this.setTurno(turno);
         this.setDepartamento(departamento);
     }
 
@@ -44,12 +53,12 @@ public class Reserva {
         this.hora = hora;
     }
 
-    public int getValor() {
-        return valor;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setValor(int valor) {
-        this.valor = valor;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
     public int getDepartamento() {

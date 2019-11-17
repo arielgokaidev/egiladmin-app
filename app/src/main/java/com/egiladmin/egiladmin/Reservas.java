@@ -36,10 +36,16 @@ public class Reservas extends AppCompatActivity {
         btnIngresarReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Ingresar();
+                ingresar();
             }
         });
 
+        btnVerReservas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ver();
+            }
+        });
 
         btnEliminarReserva.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +58,13 @@ public class Reservas extends AppCompatActivity {
 
     }
 
-    public void Ingresar() {
+    public void ingresar() {
         Intent intent = new Intent(this, IngresarReserva.class);
+        startActivity(intent);
+    }
+
+    public void ver() {
+        Intent intent = new Intent(this, VerReservas.class);
         startActivity(intent);
     }
 

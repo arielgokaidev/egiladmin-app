@@ -45,7 +45,8 @@
             android:layout_marginLeft="100px"
             android:layout_marginTop="100px"
             android:layout_marginRight="100px"
-            android:text="Eliminar" />
+            android:text="Eliminar"
+            android:visibility="gone" />
 
     </LinearLayout>
 </ScrollView>

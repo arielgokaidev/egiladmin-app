@@ -59,7 +59,4 @@ public class AdapterResidentes extends RecyclerView.Adapter<AdapterResidentes.Re
         return residente.size();
     }
 
-
-
-
 }
