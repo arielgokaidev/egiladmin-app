@@ -50,6 +50,7 @@
         android:layout_marginLeft="50px"
         android:layout_marginTop="50px"
         android:layout_marginRight="50px"
+        android:background="@color/colorBoton"
         android:text="Seleccionar fecha" />
 
     <EditText
@@ -70,6 +71,7 @@
         android:layout_marginLeft="50px"
         android:layout_marginTop="50px"
         android:layout_marginRight="50px"
+        android:background="@color/colorBoton"
         android:text="Seleccionar hora" />
 
     <RadioGroup
@@ -101,6 +103,7 @@
         android:layout_marginLeft="50px"
         android:layout_marginTop="100px"
         android:layout_marginRight="50px"
+        android:background="@color/colorBoton"
         android:text="Ingresar reserva" />
 
 </LinearLayout>

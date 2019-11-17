@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/quincho"
+    >
 
     <include
         android:id="@+id/toolbar"
@@ -19,6 +21,7 @@
         android:layout_marginTop="200px"
         android:layout_marginRight="50px"
         android:layout_marginBottom="50px"
+        android:background="@color/colorBoton"
         android:text="Residentes" />
 
     <Button
@@ -26,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50px"
+        android:background="@color/colorBoton"
         android:text="Departamentos" />
 
     <Button
@@ -33,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="50px"
+        android:background="@color/colorBoton"
         android:text="Reservas" />
 </LinearLayout>
 
