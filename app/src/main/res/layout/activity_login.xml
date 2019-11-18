@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="200px"
-        android:layout_marginTop="400px"
+        android:layout_marginTop="300px"
         android:layout_marginRight="200px"
         android:hint="Usuario"
         android:inputType="text"/>
