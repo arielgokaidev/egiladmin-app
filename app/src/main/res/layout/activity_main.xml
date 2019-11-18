@@ -39,6 +39,14 @@
         android:layout_margin="50px"
         android:background="@color/colorBoton"
         android:text="Reservas" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50px"
+        android:background="@color/colorBoton"
+        android:text="Salir" />
 </LinearLayout>
 
 

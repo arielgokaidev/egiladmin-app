@@ -9,10 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonResidentes, buttonDepartamentos, buttonReservas;
+    private Button buttonResidentes, buttonDepartamentos, buttonReservas, btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         buttonResidentes = (Button) findViewById(R.id.btnResidentes);
         buttonDepartamentos = (Button) findViewById(R.id.btnDepartamentos);
         buttonReservas = (Button) findViewById(R.id.btnReservas);
+        btnLogout = findViewById(R.id.btnLogout);
 
         buttonResidentes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openReservas();
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
             }
         });
 
@@ -80,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openReservas() {
         Intent intent = new Intent(this, Reservas.class);
+        startActivity(intent);
+    }
+
+    public void logout() {
+        Toast.makeText(getApplicationContext(),"¡Ha salido correctamente!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 

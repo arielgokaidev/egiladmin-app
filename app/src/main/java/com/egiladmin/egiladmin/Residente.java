@@ -9,7 +9,7 @@ public class Residente {
     private String password;
     protected String tipo;
     
-    public Residente() {};
+    public Residente() {}
 
     public Residente(String rut, String nombre, String apellido, String usuario, String password, String tipo) {
         this.setRut(rut);
@@ -18,6 +18,12 @@ public class Residente {
         this.setUsuario(usuario);
         this.setPassword(password);
         this.setTipo(tipo);
+    }
+
+    public Residente(String usuario, String password, String nombre) {
+        this.setUsuario(usuario);
+        this.setPassword(password);
+        this.setNombre(nombre);
     }
 
     public Residente(String rut) {
