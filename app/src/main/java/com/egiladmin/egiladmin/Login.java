@@ -51,6 +51,8 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"¡Ingreso exitoso!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(),"¡Usuario y/o Contraseña incorrectos!", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(getApplicationContext(),"¡Usuario y/o Contraseña incorrectos!", Toast.LENGTH_SHORT).show();

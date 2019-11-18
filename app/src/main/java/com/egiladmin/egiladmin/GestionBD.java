@@ -37,12 +37,12 @@ public class GestionBD {
 
     public static final String INSERTAR_DATOS_RESIDENTE_1 = "INSERT INTO RESIDENTES VALUES " +
             "(" +
-            "'17103342-K'," +
-            "'Ariel'," +
-            "'Lizana'," +
-            "'ariel'," +
+            "'12345678-9'," +
+            "'Root'," +
+            "'Root'," +
+            "'root'," +
             "'123'," +
-            "'Dueño'" +
+            "'Admin'" +
             ");";
 
     public static final String INSERTAR_DATOS_RESIDENTE_2 = "INSERT INTO RESIDENTES VALUES " +
@@ -98,7 +98,7 @@ public class GestionBD {
     // METODO SELECT * FROM RESIDENTES
     public ArrayList<Residente> leerResidentes() {
         String rut, nombre, apellido, usuario, password, tipo;
-        Cursor cursor = basedatos.rawQuery("select * from residentes", null);
+        Cursor cursor = basedatos.rawQuery("select * from residentes where usuario <> 'root'", null);
         ArrayList<Residente> residentes = new ArrayList<Residente>();
         if (cursor.moveToFirst()) {
             do {
@@ -118,7 +118,7 @@ public class GestionBD {
     // METODO SELECT RUT FROM RESIDENTES
     public ArrayList<Residente> leerRuts() {
         String rut;
-        Cursor cursor = basedatos.rawQuery("select rut from residentes", null);
+        Cursor cursor = basedatos.rawQuery("select rut from residentes where usuario <> 'root'", null);
         ArrayList<Residente> residentes = new ArrayList<Residente>();
         if (cursor.moveToFirst()) {
             do {
