@@ -295,4 +295,22 @@ public class GestionBD {
         return reservas;
     }
 
+    // METODO LOGIN
+    public ArrayList<Residente> loginResidente(String usuario) {
+        String query = "select usuario, password, nombre from residentes where usuario = '" + usuario + "'";
+        Cursor cursor = basedatos.rawQuery(query, null);
+        ArrayList<Residente> residentes = new ArrayList<Residente>();
+        if (cursor.moveToFirst()) {
+            do {
+                usuario = cursor.getString(0);
+                String password = cursor.getString(1);
+                String nombre = cursor.getString(2);
+                Residente residente = new Residente(usuario, password, nombre);
+                residentes.add(residente);
+            } while (cursor.moveToNext());
+        }
+        return residentes;
+    }
+
+
 }
